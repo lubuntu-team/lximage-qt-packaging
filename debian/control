@@ -50,21 +50,3 @@ Description: Debug package for lximage-qt
  .
  This package contain debugging symbols.
 
-# ---- to be removed in 2016 ----
-
-Package: lximage-qt5
-Depends: lximage-qt, ${misc:Depends}
-Priority: extra
-Section: oldlibs
-Architecture: all
-Description: lximage-qt transitional package
- Empty package to facilitate upgrades, can be safely removed.
-
-Package: lximage-qt5-dbg
-Depends: lximage-qt-dbg, ${misc:Depends}
-Priority: extra
-Section: oldlibs
-Architecture: all
-Description: lximage-qt transitional package (dbg)
- Empty package to facilitate upgrades, can be safely removed.
-
