@@ -42,7 +42,7 @@ Section: debug
 Priority: extra
 Breaks: lximage-qt5-dbg (<< 0.4.0)
 Replaces: lximage-qt5-dbg (<< 0.4.0)
-Depends: 
+Depends:
  ${shlibs:Depends},
  ${misc:Depends},
  lximage-qt (= ${binary:Version}),
