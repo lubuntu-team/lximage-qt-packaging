@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de">
+<TS version="2.1" language="el">
 <context>
     <name>LxImage::Application</name>
     <message>
-        <location filename="../application.cpp" line="87"/>
+        <location filename="../application.cpp" line="112"/>
         <source>Take a screenshot</source>
-        <translation>Bildschirmfoto erstellen</translation>
+        <translation>Λήψη ενός στιγμιότυπου</translation>
     </message>
     <message>
-        <location filename="../application.cpp" line="91"/>
+        <location filename="../application.cpp" line="113"/>
         <source>[FILE1, FILE2,...]</source>
-        <translation>[Datei1, Datei2,...]</translation>
+        <translation>[ΑΡΧΕΙΟ1, ΑΡΧΕΙΟ2,...]</translation>
     </message>
 </context>
 <context>
     <name>LxImage::MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="147"/>
+        <location filename="../mainwindow.cpp" line="144"/>
         <source>About</source>
-        <translation>Über</translation>
+        <translation>Σχετικά</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="145"/>
         <source>LXImage - a simple and fast image viewer
 
 Copyright (C) 2013
@@ -30,54 +30,54 @@ LXDE Project: http://lxde.org/
 
 Authors:
 Hong Jen Yee (PCMan) &lt;pcman.tw@gmail.com&gt;</source>
-        <translation>LXImage - ein einfacher und schneller Bildbetrachter
+        <translation>LXImage - ένας απλός και γρήγορος προβολέας εικόνων
 
-Copyright (C) 2013
-LXDE Project: http://lxde.org/
+Πνευματικά δικαιώματα (C) 2013
+Έργο LXDE: http://lxde.org/
 
-Autor:
+Συγγραφείς:
 Hong Jen Yee (PCMan) &lt;pcman.tw@gmail.com&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="241"/>
+        <location filename="../mainwindow.cpp" line="238"/>
         <source>Open File</source>
-        <translation>Datei öffnen</translation>
+        <translation>Άνοιγμα αρχείου</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="242"/>
-        <location filename="../mainwindow.cpp" line="263"/>
+        <location filename="../mainwindow.cpp" line="239"/>
+        <location filename="../mainwindow.cpp" line="260"/>
         <source>Image files (%1)</source>
-        <translation>Bilddateien (%1)</translation>
+        <translation>Αρχεία εικόνων (%1)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="263"/>
+        <location filename="../mainwindow.cpp" line="260"/>
         <source>Save File</source>
-        <translation>Datei speichern</translation>
+        <translation>Αποθήκευση αρχείου</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="516"/>
+        <source>%1 (Loading...) - Image Viewer</source>
+        <translation>%1 (Φορτώνεται....) - Προβολέας εικόνων</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="521"/>
+        <source>%1 (Failed to Load) - Image Viewer</source>
+        <translation>%1 (Αποτυχία φόρτωσης) - Προβολέας εικόνων</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="525"/>
-        <source>%1 (Loading...) - Image Viewer</source>
-        <translation>%1 (Lade...) - Bildbetrachter</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="530"/>
-        <source>%1 (Failed to Load) - Image Viewer</source>
-        <translation>%1 (Fehler beim Laden) - Bildbetrachter</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="534"/>
         <source>%1 (%2x%3) - Image Viewer</source>
-        <translation>%1 (%2x%3) - Bildbetrachter</translation>
+        <translation>%1 (%2x%3) - Προβολέας εικόνων</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="544"/>
+        <location filename="../mainwindow.cpp" line="535"/>
         <source>Image Viewer</source>
-        <translation>Bildbetrachter</translation>
+        <translation>Προβολέας εικόνων</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="719"/>
+        <location filename="../mainwindow.cpp" line="710"/>
         <source>Thumbnails</source>
-        <translation>Miniaturen</translation>
+        <translation>Εικόνες επισκόπησης</translation>
     </message>
 </context>
 <context>
@@ -85,285 +85,282 @@ Hong Jen Yee (PCMan) &lt;pcman.tw@gmail.com&gt;</translation>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="412"/>
         <source>Image Viewer</source>
-        <translation>Bildbetrachter</translation>
+        <translation>Προβολέας εικόνων</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="413"/>
         <source>&amp;About</source>
-        <translation>&amp;Über</translation>
+        <translation>&amp;Σχετικά</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="414"/>
         <source>&amp;Open File</source>
-        <translatorcomment>This should be &quot;&amp;Open&quot; (without &quot;File&quot;) imho. We are in the File menu.</translatorcomment>
-        <translation>Ö&amp;ffnen</translation>
+        <translation>&amp;Άνοιγμα αρχείου</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="415"/>
         <source>Ctrl+O</source>
-        <translatorcomment>Shortcuts are translated automatically. No need to manually translate it to &quot;Strg+O&quot;.</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="416"/>
         <source>&amp;Save</source>
-        <translation>&amp;Speichern</translation>
+        <translation>Απο&amp;θήκευση</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="417"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="418"/>
         <source>Save &amp;As</source>
-        <translation>Speichern &amp;unter</translation>
+        <translation>Αποθήκευση &amp;ως</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="419"/>
         <source>Ctrl+A</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+A</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="420"/>
         <source>&amp;Close</source>
-        <translation>Sch&amp;ließen</translation>
+        <translation>&amp;Κλείσιμο</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="421"/>
         <source>Ctrl+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+W</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="422"/>
         <source>Zoom &amp;In</source>
-        <translation>Ver&amp;größern</translation>
+        <translation>Μεγέ&amp;θυνση</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="423"/>
         <source>Ctrl++</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl++</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="424"/>
         <source>Zoom &amp;Out</source>
-        <translation>Ver&amp;kleinern</translation>
+        <translation>Σμίκρ&amp;υνση</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="425"/>
         <source>Ctrl+-</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+-</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="426"/>
         <source>&amp;Copy to Clipboard</source>
-        <translation>In die &amp;Zwischenablage einfügen</translation>
+        <translation>Αντιγραφή στο πρό&amp;χειρο</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="427"/>
         <location filename="../../build/src/ui_mainwindow.h" line="429"/>
         <source>Next File</source>
-        <translation>Nächste Datei</translation>
+        <translation>Επόμενο αρχείο</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="432"/>
         <location filename="../../build/src/ui_mainwindow.h" line="434"/>
         <source>Previous File</source>
-        <translation>Vorige Datei</translation>
+        <translation>Προηγούμενο αρχείο</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="431"/>
         <source>PgDown</source>
-        <translation type="unfinished"></translation>
+        <translation>PgDown</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="436"/>
         <source>PgUp</source>
-        <translation type="unfinished"></translation>
+        <translation>PgUp</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="437"/>
         <source>Original Size</source>
-        <translation>Originalgröße</translation>
+        <translation>Αρχικό Μέγεθος</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="438"/>
         <source>&amp;Fit</source>
-        <translation>Passen&amp;d</translation>
+        <translation>&amp;Ταίριασμα</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="439"/>
         <source>&amp;Rotate Clockwise</source>
-        <translation>Im &amp;Uhrzeigersinn drehen</translation>
+        <translation>Περιστροφή &amp;δεξιόστροφα</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="440"/>
         <source>Rotate &amp;Counterclockwise</source>
-        <translation>&amp;Gegen den Uhrzeigersinn drehen</translation>
+        <translation>Περιστροφή &amp;αριστερόστροφα</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="441"/>
         <source>P&amp;references</source>
-        <translation>Einste&amp;llungen</translation>
+        <translation>&amp;Επιλογές</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="442"/>
         <source>&amp;Print</source>
-        <translation>&amp;Drucken</translation>
+        <translation>Εκτύ&amp;πωση</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="443"/>
         <source>Ctrl+P</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+P</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="444"/>
         <source>First File</source>
-        <translation>Erste Datei</translation>
+        <translation>Πρώτο αρχείο</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="445"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Αρχική</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="446"/>
         <source>Last File</source>
-        <translation>Letzte Datei</translation>
+        <translation>Τελευταίο αρχείο</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="447"/>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Τέλος</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="448"/>
         <source>&amp;New Window</source>
-        <translation>&amp;Neues Fenster</translation>
+        <translation>&amp;Νέο παράθυρο</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="449"/>
         <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+N</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="450"/>
         <source>Flip &amp;Horizontally</source>
-        <translation>&amp;Horizontal spiegeln</translation>
+        <translation>Αναστροφή &amp;οριζόντια</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="451"/>
         <source>Capture Screenshot</source>
-        <translation>Bildschirmfoto erstellen</translation>
+        <translation>Λήψη στιγμιότυπου</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="452"/>
         <source>F&amp;ull Screen</source>
-        <translation>&amp;Gesamter Bildschirm</translation>
+        <translation>Π&amp;λήρης οθόνη</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="453"/>
         <source>F11</source>
-        <translation type="unfinished"></translation>
+        <translation>F11</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="454"/>
         <source>Flip &amp;Vertically</source>
-        <translation>&amp;Vertikal spiegeln</translation>
+        <translation>Αναστροφή &amp;κατακόρυφα</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="455"/>
         <source>&amp;Paste from Clipboard</source>
-        <translation>&amp;Aus Zwischenablage einfügen</translation>
+        <translation>&amp;Επικόλληση από το πρόχειρο</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="456"/>
         <source>&amp;Slide Show</source>
-        <translation>&amp;Diaschau</translation>
+        <translation>&amp;Προβολή διαφάνειας</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="457"/>
         <source>&amp;Delete</source>
-        <translation>&amp;Löschen</translation>
+        <translation>&amp;Διαγραφή</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="458"/>
         <source>Del</source>
-        <translation type="unfinished"></translation>
+        <translation>Del</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="459"/>
         <source>Show Thumbnails</source>
-        <translation>Miniaturen anzeigen</translation>
+        <translation>Εμφάνιση εικόνων επισκόπησης</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="460"/>
         <source>File Properties</source>
-        <translatorcomment>Translation of &apos;file&apos; skipped, it is redundant (this is the file menu).</translatorcomment>
-        <translation>Eigenschaften</translation>
+        <translation>Ιδιότητες αρχείου</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="461"/>
         <source>&amp;File</source>
-        <translation>&amp;Datei</translation>
+        <translation>&amp;Αρχείο</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="462"/>
         <source>&amp;Help</source>
-        <translation>&amp;Hilfe</translation>
+        <translation>&amp;Βοήθεια</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="463"/>
         <source>Go</source>
-        <translation>Gehe zu</translation>
+        <translation>Μετάβαση</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="464"/>
         <source>&amp;View</source>
-        <translation>&amp;Ansicht</translation>
+        <translation>&amp;Προβολή</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="465"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Bearbeiten</translation>
+        <translation>&amp;Επεξεργασία</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="466"/>
         <source>Toolbar</source>
-        <translation>Werkzeugleiste</translation>
+        <translation>Γραμμή εργαλείων</translation>
     </message>
 </context>
 <context>
     <name>PreferencesDialog</name>
     <message>
-        <location filename="../../build/src/ui_preferencesdialog.h" line="126"/>
+        <location filename="../../build/src/ui_preferencesdialog.h" line="125"/>
         <source>Preferences</source>
-        <translation>Einstellungen</translation>
+        <translation>Προτιμήσεις</translation>
+    </message>
+    <message>
+        <location filename="../../build/src/ui_preferencesdialog.h" line="126"/>
+        <source>Icon theme:</source>
+        <translation>Θέμα εικονιδίων:</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_preferencesdialog.h" line="127"/>
-        <source>Icon theme:</source>
-        <translation>Symboldesign:</translation>
+        <source>Normal background color:</source>
+        <translation>Τυπικό χρώμα παρασκηνίου:</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_preferencesdialog.h" line="128"/>
-        <source>Normal background color:</source>
-        <translation>Normale Hintergrundfarbe:</translation>
+        <source>Fullscreen background color:</source>
+        <translation>Χρώμα παρασκηνίου πλήρους οθόνης: </translation>
     </message>
     <message>
-        <location filename="../../build/src/ui_preferencesdialog.h" line="129"/>
-        <source>Fullscreen background color:</source>
-        <translation>Vollbild-Hintergrundfarbe:</translation>
+        <location filename="../../build/src/ui_preferencesdialog.h" line="131"/>
+        <source>Slide show interval (seconds):</source>
+        <translation>Χρονική καθυστέρηση προβολής διαφανειών (δευτερόλεπτα):</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_preferencesdialog.h" line="132"/>
-        <source>Slide show interval (seconds):</source>
-        <translation>Diaschau Bildwechsel (Sekunden):</translation>
-    </message>
-    <message>
-        <location filename="../../build/src/ui_preferencesdialog.h" line="133"/>
         <source>General</source>
-        <translation>Allgemein</translation>
+        <translation>Γενικά</translation>
     </message>
 </context>
 <context>
@@ -371,47 +368,47 @@ Hong Jen Yee (PCMan) &lt;pcman.tw@gmail.com&gt;</translation>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="123"/>
         <source>Screenshot</source>
-        <translation>Bildschirmfoto</translation>
+        <translation>Στιγμιότυπο</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="124"/>
         <source>Take a screenshot</source>
-        <translation>Bildschirmfoto erstellen</translation>
+        <translation>Λήψη στιγμιότυπου</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="125"/>
         <source>Region</source>
-        <translation>Bereich</translation>
+        <translation>Περιοχή</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="126"/>
         <source>Whole screen</source>
-        <translation>Gesamter Bildschirm</translation>
+        <translation>Ολόκληρη η οθόνη</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="127"/>
         <source>Current window only</source>
-        <translation>Nur aktuelles Fenster</translation>
+        <translation>Μόνον το τρέχον παράθυρο</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="128"/>
         <source>Include mouse cursor</source>
-        <translation>Einschließlich Mauszeiger</translation>
+        <translation>Συμπερίληψη του δρομέα του ποντικιού</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="129"/>
         <source> seconds</source>
-        <translation> Sekunden</translation>
+        <translation> δευτερόλεπτα</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="130"/>
         <source>Delay:</source>
-        <translation>Verzögerung:</translation>
+        <translation>Καθυστέρηση:</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="131"/>
         <source>Include window title and frame</source>
-        <translation>Einschließlich Fenstertitel und Rahmen</translation>
+        <translation>Συμπερίληψη του τίτλου και του πλαισίου του παραθύρου</translation>
     </message>
 </context>
 </TS>

@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de">
+<TS version="2.1" language="hu_HU">
 <context>
     <name>LxImage::Application</name>
     <message>
-        <location filename="../application.cpp" line="87"/>
+        <location filename="../application.cpp" line="112"/>
         <source>Take a screenshot</source>
-        <translation>Bildschirmfoto erstellen</translation>
+        <translation>Képernyőkép</translation>
     </message>
     <message>
-        <location filename="../application.cpp" line="91"/>
+        <location filename="../application.cpp" line="113"/>
         <source>[FILE1, FILE2,...]</source>
-        <translation>[Datei1, Datei2,...]</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>LxImage::MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="147"/>
+        <location filename="../mainwindow.cpp" line="144"/>
         <source>About</source>
-        <translation>Über</translation>
+        <translation>Rólunk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="145"/>
         <source>LXImage - a simple and fast image viewer
 
 Copyright (C) 2013
@@ -30,54 +30,54 @@ LXDE Project: http://lxde.org/
 
 Authors:
 Hong Jen Yee (PCMan) &lt;pcman.tw@gmail.com&gt;</source>
-        <translation>LXImage - ein einfacher und schneller Bildbetrachter
+        <translation>LXImage - az egyszerű és gyors képnéző
 
 Copyright (C) 2013
 LXDE Project: http://lxde.org/
 
-Autor:
+Authors:
 Hong Jen Yee (PCMan) &lt;pcman.tw@gmail.com&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="241"/>
+        <location filename="../mainwindow.cpp" line="238"/>
         <source>Open File</source>
-        <translation>Datei öffnen</translation>
+        <translation>Fájl megnyitás</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="242"/>
-        <location filename="../mainwindow.cpp" line="263"/>
+        <location filename="../mainwindow.cpp" line="239"/>
+        <location filename="../mainwindow.cpp" line="260"/>
         <source>Image files (%1)</source>
-        <translation>Bilddateien (%1)</translation>
+        <translation>Képfájlok (%1)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="263"/>
+        <location filename="../mainwindow.cpp" line="260"/>
         <source>Save File</source>
-        <translation>Datei speichern</translation>
+        <translation>Fájl mentés</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="516"/>
+        <source>%1 (Loading...) - Image Viewer</source>
+        <translation>%1 (Betöltés...) - Képnéző</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="521"/>
+        <source>%1 (Failed to Load) - Image Viewer</source>
+        <translation>%1 (Betöltés sikertelen) - Képnéző</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="525"/>
-        <source>%1 (Loading...) - Image Viewer</source>
-        <translation>%1 (Lade...) - Bildbetrachter</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="530"/>
-        <source>%1 (Failed to Load) - Image Viewer</source>
-        <translation>%1 (Fehler beim Laden) - Bildbetrachter</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="534"/>
         <source>%1 (%2x%3) - Image Viewer</source>
-        <translation>%1 (%2x%3) - Bildbetrachter</translation>
+        <translation>%1 (Loading...) - Képnéző</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="544"/>
+        <location filename="../mainwindow.cpp" line="535"/>
         <source>Image Viewer</source>
-        <translation>Bildbetrachter</translation>
+        <translation>Képnéző</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="719"/>
+        <location filename="../mainwindow.cpp" line="710"/>
         <source>Thumbnails</source>
-        <translation>Miniaturen</translation>
+        <translation>Bélyegképek</translation>
     </message>
 </context>
 <context>
@@ -85,285 +85,282 @@ Hong Jen Yee (PCMan) &lt;pcman.tw@gmail.com&gt;</translation>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="412"/>
         <source>Image Viewer</source>
-        <translation>Bildbetrachter</translation>
+        <translation>Képnéző</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="413"/>
         <source>&amp;About</source>
-        <translation>&amp;Über</translation>
+        <translation>Ról&amp;am</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="414"/>
         <source>&amp;Open File</source>
-        <translatorcomment>This should be &quot;&amp;Open&quot; (without &quot;File&quot;) imho. We are in the File menu.</translatorcomment>
-        <translation>Ö&amp;ffnen</translation>
+        <translation>&amp;Fájlnyitás</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="415"/>
         <source>Ctrl+O</source>
-        <translatorcomment>Shortcuts are translated automatically. No need to manually translate it to &quot;Strg+O&quot;.</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="416"/>
         <source>&amp;Save</source>
-        <translation>&amp;Speichern</translation>
+        <translation>&amp;Ment</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="417"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="418"/>
         <source>Save &amp;As</source>
-        <translation>Speichern &amp;unter</translation>
+        <translation>&amp;Másként ment</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="419"/>
         <source>Ctrl+A</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="420"/>
         <source>&amp;Close</source>
-        <translation>Sch&amp;ließen</translation>
+        <translation>&amp;Bezár</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="421"/>
         <source>Ctrl+W</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="422"/>
         <source>Zoom &amp;In</source>
-        <translation>Ver&amp;größern</translation>
+        <translation>&amp;Nagyít</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="423"/>
         <source>Ctrl++</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="424"/>
         <source>Zoom &amp;Out</source>
-        <translation>Ver&amp;kleinern</translation>
+        <translation>&amp;Kicsinyít</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="425"/>
         <source>Ctrl+-</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="426"/>
         <source>&amp;Copy to Clipboard</source>
-        <translation>In die &amp;Zwischenablage einfügen</translation>
+        <translation>&amp;Vágólapra másol</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="427"/>
         <location filename="../../build/src/ui_mainwindow.h" line="429"/>
         <source>Next File</source>
-        <translation>Nächste Datei</translation>
+        <translation>Következő fájl</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="432"/>
         <location filename="../../build/src/ui_mainwindow.h" line="434"/>
         <source>Previous File</source>
-        <translation>Vorige Datei</translation>
+        <translation>Előző fájl</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="431"/>
         <source>PgDown</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="436"/>
         <source>PgUp</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="437"/>
         <source>Original Size</source>
-        <translation>Originalgröße</translation>
+        <translation>Eredeti méret</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="438"/>
         <source>&amp;Fit</source>
-        <translation>Passen&amp;d</translation>
+        <translation>&amp;Kitölt</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="439"/>
         <source>&amp;Rotate Clockwise</source>
-        <translation>Im &amp;Uhrzeigersinn drehen</translation>
+        <translation>&amp;Jobbra forgat</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="440"/>
         <source>Rotate &amp;Counterclockwise</source>
-        <translation>&amp;Gegen den Uhrzeigersinn drehen</translation>
+        <translation>&amp;Balra forgat</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="441"/>
         <source>P&amp;references</source>
-        <translation>Einste&amp;llungen</translation>
+        <translation>&amp;Beállítások</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="442"/>
         <source>&amp;Print</source>
-        <translation>&amp;Drucken</translation>
+        <translation>&amp;Nyomtat</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="443"/>
         <source>Ctrl+P</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="444"/>
         <source>First File</source>
-        <translation>Erste Datei</translation>
+        <translation>Első fájl</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="445"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="446"/>
         <source>Last File</source>
-        <translation>Letzte Datei</translation>
+        <translation>Utolsó fájl</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="447"/>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Vége</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="448"/>
         <source>&amp;New Window</source>
-        <translation>&amp;Neues Fenster</translation>
+        <translation>&amp;Új ablak</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="449"/>
         <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="450"/>
         <source>Flip &amp;Horizontally</source>
-        <translation>&amp;Horizontal spiegeln</translation>
+        <translation>Vízszintesen átfordít</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="451"/>
         <source>Capture Screenshot</source>
-        <translation>Bildschirmfoto erstellen</translation>
+        <translation>Képernyókép készítés</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="452"/>
         <source>F&amp;ull Screen</source>
-        <translation>&amp;Gesamter Bildschirm</translation>
+        <translation>&amp;Teljes kép</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="453"/>
         <source>F11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="454"/>
         <source>Flip &amp;Vertically</source>
-        <translation>&amp;Vertikal spiegeln</translation>
+        <translation>&amp;Fejtetőre állít</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="455"/>
         <source>&amp;Paste from Clipboard</source>
-        <translation>&amp;Aus Zwischenablage einfügen</translation>
+        <translation>Vágóla&amp;pról beilleszt</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="456"/>
         <source>&amp;Slide Show</source>
-        <translation>&amp;Diaschau</translation>
+        <translation>&amp;Diavetítés</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="457"/>
         <source>&amp;Delete</source>
-        <translation>&amp;Löschen</translation>
+        <translation>&amp;Törlés</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="458"/>
         <source>Del</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="459"/>
         <source>Show Thumbnails</source>
-        <translation>Miniaturen anzeigen</translation>
+        <translation>Bélyegképek</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="460"/>
         <source>File Properties</source>
-        <translatorcomment>Translation of &apos;file&apos; skipped, it is redundant (this is the file menu).</translatorcomment>
-        <translation>Eigenschaften</translation>
+        <translation>Fájljellemzők</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="461"/>
         <source>&amp;File</source>
-        <translation>&amp;Datei</translation>
+        <translation>&amp;Fájl</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="462"/>
         <source>&amp;Help</source>
-        <translation>&amp;Hilfe</translation>
+        <translation>&amp;Segítség</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="463"/>
         <source>Go</source>
-        <translation>Gehe zu</translation>
+        <translation>Ugrás</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="464"/>
         <source>&amp;View</source>
-        <translation>&amp;Ansicht</translation>
+        <translation>&amp;Nézet</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="465"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Bearbeiten</translation>
+        <translation>&amp;Szerkeszt</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="466"/>
         <source>Toolbar</source>
-        <translation>Werkzeugleiste</translation>
+        <translation>Eszközsáv</translation>
     </message>
 </context>
 <context>
     <name>PreferencesDialog</name>
     <message>
-        <location filename="../../build/src/ui_preferencesdialog.h" line="126"/>
+        <location filename="../../build/src/ui_preferencesdialog.h" line="125"/>
         <source>Preferences</source>
-        <translation>Einstellungen</translation>
+        <translation>Beállítások</translation>
+    </message>
+    <message>
+        <location filename="../../build/src/ui_preferencesdialog.h" line="126"/>
+        <source>Icon theme:</source>
+        <translation>Ikontéma:</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_preferencesdialog.h" line="127"/>
-        <source>Icon theme:</source>
-        <translation>Symboldesign:</translation>
+        <source>Normal background color:</source>
+        <translation>Normál háttérszín:</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_preferencesdialog.h" line="128"/>
-        <source>Normal background color:</source>
-        <translation>Normale Hintergrundfarbe:</translation>
+        <source>Fullscreen background color:</source>
+        <translation>Teljeskép háttérszín:</translation>
     </message>
     <message>
-        <location filename="../../build/src/ui_preferencesdialog.h" line="129"/>
-        <source>Fullscreen background color:</source>
-        <translation>Vollbild-Hintergrundfarbe:</translation>
+        <location filename="../../build/src/ui_preferencesdialog.h" line="131"/>
+        <source>Slide show interval (seconds):</source>
+        <translation>Diaváltás (másodperc):</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_preferencesdialog.h" line="132"/>
-        <source>Slide show interval (seconds):</source>
-        <translation>Diaschau Bildwechsel (Sekunden):</translation>
-    </message>
-    <message>
-        <location filename="../../build/src/ui_preferencesdialog.h" line="133"/>
         <source>General</source>
-        <translation>Allgemein</translation>
+        <translation>Általános</translation>
     </message>
 </context>
 <context>
@@ -371,47 +368,47 @@ Hong Jen Yee (PCMan) &lt;pcman.tw@gmail.com&gt;</translation>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="123"/>
         <source>Screenshot</source>
-        <translation>Bildschirmfoto</translation>
+        <translation>Képernyőkép</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="124"/>
         <source>Take a screenshot</source>
-        <translation>Bildschirmfoto erstellen</translation>
+        <translation>Képernyőfénykép</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="125"/>
         <source>Region</source>
-        <translation>Bereich</translation>
+        <translation>Terület</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="126"/>
         <source>Whole screen</source>
-        <translation>Gesamter Bildschirm</translation>
+        <translation>Teljes kép</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="127"/>
         <source>Current window only</source>
-        <translation>Nur aktuelles Fenster</translation>
+        <translation>Aktuális ablak</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="128"/>
         <source>Include mouse cursor</source>
-        <translation>Einschließlich Mauszeiger</translation>
+        <translation>Egérkurzor is</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="129"/>
         <source> seconds</source>
-        <translation> Sekunden</translation>
+        <translation> másodperc</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="130"/>
         <source>Delay:</source>
-        <translation>Verzögerung:</translation>
+        <translation>Késleltetés:</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_screenshotdialog.h" line="131"/>
         <source>Include window title and frame</source>
-        <translation>Einschließlich Fenstertitel und Rahmen</translation>
+        <translation>Ablakkeret és fejléc is</translation>
     </message>
 </context>
 </TS>

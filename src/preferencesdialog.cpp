@@ -33,7 +33,7 @@ PreferencesDialog::PreferencesDialog(QWidget* parent):
   Application* app = static_cast<Application*>(qApp);
   Settings& settings = app->settings();
   app->addWindow();
-  
+
   initIconThemes(settings);
   ui.bgColor->setColor(settings.bgColor());
   ui.fullScreenBgColor->setColor(settings.fullScreenBgColor());
@@ -59,8 +59,8 @@ void PreferencesDialog::accept() {
       QIcon::setThemeName(newIconTheme);
       // update the UI by emitting a style change event
       Q_FOREACH(QWidget *widget, QApplication::allWidgets()) {
-	QEvent event(QEvent::StyleChange);
-	QApplication::sendEvent(widget, &event);
+        QEvent event(QEvent::StyleChange);
+        QApplication::sendEvent(widget, &event);
       }
     }
   }
@@ -68,7 +68,7 @@ void PreferencesDialog::accept() {
   settings.setBgColor(ui.bgColor->color());
   settings.setFullScreenBgColor(ui.fullScreenBgColor->color());
   settings.setSlideShowInterval(ui.slideShowInterval->value());
-  
+
   settings.save();
   QDialog::accept();
   app->applySettings();
@@ -124,7 +124,7 @@ void PreferencesDialog::initIconThemes(Settings& settings) {
     for(i = 0; i < n; ++i) {
       QVariant itemData = ui.iconTheme->itemData(i);
       if(itemData == settings.fallbackIconTheme()) {
-	break;
+        break;
       }
     }
     if(i >= n)
