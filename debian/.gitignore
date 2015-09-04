@@ -1,0 +1,6 @@
+/*.debhelper
+/*.log
+/*.substvars
+/files
+/lximage-qt/
+/lximage-qt-dbg/

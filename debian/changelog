@@ -1,5 +1,5 @@
 lximage-qt (0.4.0-1) unstable; urgency=low
 
-  * Initial release
+  * Initial release (Closes: #795802)
 
- -- Alf Gaida <agaida@siduction.org>  Mon, 24 Feb 2014 23:41:30 +0100
+ -- Alf Gaida <agaida@siduction.org>  Fri, 04 Sep 2015 19:41:32 +0200
