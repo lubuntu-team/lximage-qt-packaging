@@ -1,19 +1,5 @@
 lximage-qt (0.4.0+20150828-1) unstable; urgency=medium
 
-  * Cherry-picked upstream version 0.4.0+20150828.
-
- -- Alf Gaida <agaida@siduction.org>  Fri, 04 Sep 2015 20:17:43 +0200
-
-lximage-qt (0.4.0-1) unstable; urgency=low
-
   * Initial release (Closes: #795802)
-  * Fixed control with cme fix
-  * Fixed docs
-  * Added gpb.conf
-  * Added source/local-options
-  * Added source/options
-  * Added .gitignore
-  * Added upstream signing-key and use it in watch file
 
-
- -- Alf Gaida <agaida@siduction.org>  Fri, 04 Sep 2015 19:41:32 +0200
+ -- ChangZhuo Chen (陳昌倬) <czchen@debian.org>  Thu, 24 Sep 2015 18:50:12 +0800
