@@ -1,3 +1,9 @@
+lximage-qt (0.4.0+20150828-2) unstable; urgency=medium
+
+  * Add -fPIE -pie for lintian warning.
+
+ -- ChangZhuo Chen (陳昌倬) <czchen@debian.org>  Thu, 22 Oct 2015 20:18:27 +0800
+
 lximage-qt (0.4.0+20150828-1) unstable; urgency=medium
 
   * Initial release (Closes: #795802)
