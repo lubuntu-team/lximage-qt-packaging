@@ -30,15 +30,3 @@ Description: Image viewer for LXQt
  lximage-qt is a simple image viewer for LXQt.
  .
  This package contain the program files.
-
-Package: lximage-qt-dbg
-Architecture: any
-Section: debug
-Priority: extra
-Depends: ${shlibs:Depends},
-         ${misc:Depends},
-         lximage-qt (= ${binary:Version})
-Description: Debug package for lximage-qt
- lximage-qt is a simple image viewer for LXQt.
- .
- This package contain debugging symbols.
