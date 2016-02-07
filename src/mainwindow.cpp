@@ -35,6 +35,7 @@
 #include <QShortcut>
 #include <QDockWidget>
 #include <QScrollBar>
+#include <QDesktopWidget>
 #include "application.h"
 #include <libfm-qt/path.h>
 #include <libfm-qt/folderview.h>
@@ -437,6 +438,10 @@ void MainWindow::onImageLoaded(LoadImageJob* job) {
     // if there are errors
     // TODO: show a info bar?
   }
+
+  /* we resized and moved the window without showing
+     it in updateUI(), so we need to show it here */
+  show();
 }
 
 void MainWindow::onImageSaved(SaveImageJob* job) {
@@ -522,28 +527,56 @@ void MainWindow::updateUI() {
   if(currentFile_) {
     char* dispName = fm_path_display_basename(currentFile_);
     if(loadJob_) { // if loading is in progress
-      title = tr("%1 (Loading...) - Image Viewer")
+      title = tr("[*]%1 (Loading...) - Image Viewer")
                 .arg(QString::fromUtf8(dispName));
     }
     else {
       if(image_.isNull()) {
-        title = tr("%1 (Failed to Load) - Image Viewer")
+        title = tr("[*]%1 (Failed to Load) - Image Viewer")
                   .arg(QString::fromUtf8(dispName));
       }
       else {
-        title = tr("%1 (%2x%3) - Image Viewer")
+        title = tr("[*]%1 (%2x%3) - Image Viewer")
                   .arg(QString::fromUtf8(dispName))
                   .arg(image_.width())
                   .arg(image_.height());
+        /* Here we try to implement the following behavior as far as possible:
+             (1) A minimum size of 400x400 is assumed;
+             (2) The window is scaled to fit the image;
+             (3) But for too big images, the window is scaled down;
+             (4) The window is centered on the screen. */
+        if (!isVisible()) {
+          /* To have a correct position, we should move the window BEFORE
+             it's shown but we also need to know the dimensions of its view.
+             Therefore, we use show() without really showing the window. */
+          setAttribute(Qt::WA_DontShowOnScreen);
+          show();
+          int scrollThickness = style()->pixelMetric(QStyle::PM_ScrollBarExtent);
+          QSize newSize = size() + image_.size() - ui.view->size() + QSize(scrollThickness, scrollThickness);
+          QRect ag = QApplication::desktop()->availableGeometry();
+          // since the window isn't decorated yet, we have to assume a max thickness for its frame
+          QSize maxFrame = QSize(50, 100);
+          if (newSize.width() > ag.width() - maxFrame.width() || newSize.height() > ag.height() - maxFrame.height())
+            newSize.scale (ag.width() - maxFrame.width(), ag.height() - maxFrame.height(), Qt::KeepAspectRatio);
+          // a minimum size of 400x400 is good
+          if (newSize.width() < 400) newSize.rwidth() = 400;
+          if (newSize.height() < 400 ) newSize.rheight() = 400;
+          move (ag.x() + (ag.width() - newSize.width())/2,
+                ag.y() + (ag.height() - newSize.height())/2);
+          resize(newSize);
+          hide(); // hide it to show it again later, at onImageLoaded()
+          setAttribute(Qt::WA_DontShowOnScreen, false);
+        }
       }
     }
     g_free(dispName);
     // TODO: update status bar, show current index in the folder
   }
   else {
-    title = tr("Image Viewer");
+    title = tr("[*]Image Viewer");
   }
   setWindowTitle(title);
+  setWindowModified(imageModified_);
 }
 
 // Load the specified image file asynchronously in a worker thread.
@@ -567,11 +600,28 @@ void MainWindow::loadImage(FmPath* filePath, QModelIndex index) {
   // clear current image, but do not update the view now to prevent flickers
   image_ = QImage();
 
-  // start a new gio job to load the specified image
-  loadJob_ = new LoadImageJob(this, filePath);
-  loadJob_->start();
+  const char* basename = fm_path_get_basename(currentFile_);
+  char* mimeType = g_content_type_guess(basename, NULL, 0, NULL);
+  if(mimeType && strcmp(mimeType, "image/gif") == 0) {
+    g_free(mimeType);
+    char *file_Name = fm_path_to_str(currentFile_);
+    QString fileName(file_Name);
+    g_free(file_Name);
+    ui.view->setAutoZoomFit(true); // like in onImageLoaded()
+    ui.view->setGifAnimation(fileName);
+    image_ = ui.view->image();
+    updateUI();
+    show();
+  }
+  else {
+    if(mimeType)
+      g_free(mimeType);
+    // start a new gio job to load the specified image
+    loadJob_ = new LoadImageJob(this, filePath);
+    loadJob_->start();
 
-  updateUI();
+    updateUI();
+  }
 }
 
 void MainWindow::saveImage(FmPath* filePath) {
@@ -583,23 +633,55 @@ void MainWindow::saveImage(FmPath* filePath) {
   // FIXME: add a cancel button to the UI? update status bar?
 }
 
+QGraphicsItem* MainWindow::getGifItem() {
+  if(!ui.view->items().isEmpty()) {
+    QGraphicsItem *gifItem = ui.view->items().at(0);
+    if(gifItem->isWidget()) // we have gif animation
+      return gifItem;
+  }
+  return NULL;
+}
+
 void MainWindow::on_actionRotateClockwise_triggered() {
+  QGraphicsItem *gifItem = getGifItem();
   if(!image_.isNull()) {
     QTransform transform;
     transform.rotate(90.0);
     image_ = image_.transformed(transform, Qt::SmoothTransformation);
-    ui.view->setImage(image_);
+    /* when this is a gif animation, we need to rotate the first frame
+       without showing it to have the right measure for auto-zooming */
+    ui.view->setImage(image_, gifItem ? false : true);
     setModified(true);
+  }
+
+  if(gifItem) {
+    QTransform transform;
+    transform.translate(gifItem->sceneBoundingRect().height(), 0);
+    transform.rotate(90);
+    // we need to apply transformations in the reverse order
+    QTransform prevTrans = gifItem->transform();
+    gifItem->setTransform(transform, false);
+    gifItem->setTransform(prevTrans, true);
   }
 }
 
 void MainWindow::on_actionRotateCounterclockwise_triggered() {
+  QGraphicsItem *gifItem = getGifItem();
   if(!image_.isNull()) {
     QTransform transform;
     transform.rotate(-90.0);
     image_ = image_.transformed(transform, Qt::SmoothTransformation);
-    ui.view->setImage(image_);
+    ui.view->setImage(image_, gifItem ? false : true);
     setModified(true);
+  }
+
+  if(gifItem) {
+    QTransform transform;
+    transform.translate(0, gifItem->sceneBoundingRect().width());
+    transform.rotate(-90);
+    QTransform prevTrans = gifItem->transform();
+    gifItem->setTransform(transform, false);
+    gifItem->setTransform(prevTrans, true);
   }
 }
 
@@ -626,26 +708,44 @@ void MainWindow::on_actionPaste_triggered() {
 }
 
 void MainWindow::on_actionFlipVertical_triggered() {
-  if(!image_.isNull()) {
+  if(QGraphicsItem *gifItem = getGifItem()) {
+    QTransform transform;
+    transform.scale(1, -1);
+    transform.translate(0, -gifItem->sceneBoundingRect().height());
+    QTransform prevTrans = gifItem->transform();
+    gifItem->setTransform(transform, false);
+    gifItem->setTransform(prevTrans, true);
+    setModified(true);
+    /* we don't need to flip the first frame because its position
+       and dimensions are the same as before while it isn't shown */
+  }
+  else if(!image_.isNull()) {
     image_ = image_.mirrored(false, true);
     ui.view->setImage(image_);
     setModified(true);
   }
-  setModified(true);
 }
 
 void MainWindow::on_actionFlipHorizontal_triggered() {
-  if(!image_.isNull()) {
+  if(QGraphicsItem *gifItem = getGifItem()) {
+    QTransform transform;
+    transform.scale(-1, 1);
+    transform.translate(-gifItem->sceneBoundingRect().width(), 0);
+    QTransform prevTrans = gifItem->transform();
+    gifItem->setTransform(transform, false);
+    gifItem->setTransform(prevTrans, true);
+    setModified(true);
+  }
+  else if(!image_.isNull()) {
     image_ = image_.mirrored(true, false);
     ui.view->setImage(image_);
     setModified(true);
   }
-  setModified(true);
 }
 
 void MainWindow::setModified(bool modified) {
   imageModified_ = modified;
-  updateUI(); // TODO: update title bar to reflect the state change
+  updateUI();
 }
 
 void MainWindow::applySettings() {
@@ -731,6 +831,13 @@ void MainWindow::setShowThumbnails(bool show) {
       thumbnailsView_->setFixedHeight(listView->gridSize().height() + scrollHeight);
       thumbnailsView_->setModel(proxyModel_);
       proxyModel_->setShowThumbnails(true);
+      if (currentFile_) { // select the loaded image
+        currentIndex_ = indexFromPath(currentFile_);
+        listView->setCurrentIndex(currentIndex_);
+        // wait to center the selection
+        QCoreApplication::processEvents();
+        listView->scrollTo(currentIndex_, QAbstractItemView::PositionAtCenter);
+      }
       connect(thumbnailsView_->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(onThumbnailSelChanged(QItemSelection,QItemSelection)));
     }
   }

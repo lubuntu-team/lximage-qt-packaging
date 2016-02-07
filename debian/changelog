@@ -1,3 +1,15 @@
+lximage-qt (0.4.0+20160108-1) unstable; urgency=medium
+
+  * Cherry-picked new upstream version 0.4.0+20160108. 
+  * Removed outdated build dependency libfm-qt5-dev,
+  * Added build dependencies libfm-qt-dev and libmenu-cache-dev. 
+  * Bump Standards to 3.9.7
+  * Changed the VCS-fields to https://
+  * Fix Years in copyright
+  * Enable hardening=+all
+
+ -- Alf Gaida <agaida@siduction.org>  Sun, 07 Feb 2016 22:55:06 +0100
+
 lximage-qt (0.4.0+20151117-2) unstable; urgency=medium
 
   * Remove dbg package in favor of dbgsym. 
