@@ -37,6 +37,7 @@ Application::Application(int& argc, char** argv):
   QApplication(argc, argv),
   windowCount_(0),
   libFm() {
+  setApplicationVersion(LXIMAGE_VERSION);
 }
 
 bool Application::init(int argc, char** argv) {
@@ -81,6 +82,7 @@ bool Application::init(int argc, char** argv) {
 bool Application::parseCommandLineArgs() {
   QCommandLineParser parser;
   parser.addHelpOption();
+  parser.addVersionOption();
 
   QCommandLineOption screenshotOption(
     QStringList() << "s" << "screenshot",
@@ -152,7 +154,9 @@ void Application::newWindow(QStringList files) {
       if(settings_.windowMaximized())
         window->setWindowState(window->windowState() | Qt::WindowMaximized);
 
-      window->show();
+      /* when there's an image, we show the window AFTER resizing
+         and centering it appropriately at MainWindow::updateUI() */
+      //window->show();
     }
   }
 }
