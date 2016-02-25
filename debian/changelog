@@ -1,3 +1,14 @@
+lximage-qt (0.4.0+20160108-2) unstable; urgency=medium
+
+  [ Eduard Sanou ]
+  * Fix misdetection as binary input in grep when LC_ALL=C
+
+  [ ChangZhuo Chen (陳昌倬) ]
+  * Merge patch from Eduard Sanou to make reproducible build
+    (Closes: #815898).
+
+ -- Eduard Sanou <dhole@openmailbox.org>  Wed, 24 Feb 2016 23:42:25 +0100
+
 lximage-qt (0.4.0+20160108-1) unstable; urgency=medium
 
   * Cherry-picked new upstream version 0.4.0+20160108. 
