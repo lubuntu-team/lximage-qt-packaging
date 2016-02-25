@@ -1,3 +1,9 @@
+lximage-qt (0.4.0+20160108-3) unstable; urgency=medium
+
+  * Add missing patch from 0.4.0+20160108-2.
+
+ -- ChangZhuo Chen (陳昌倬) <czchen@debian.org>  Thu, 25 Feb 2016 23:50:39 +0800
+
 lximage-qt (0.4.0+20160108-2) unstable; urgency=medium
 
   [ Eduard Sanou ]
