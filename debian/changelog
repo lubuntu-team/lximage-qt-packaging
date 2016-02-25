@@ -7,7 +7,7 @@ lximage-qt (0.4.0+20160108-2) unstable; urgency=medium
   * Merge patch from Eduard Sanou to make reproducible build
     (Closes: #815898).
 
- -- Eduard Sanou <dhole@openmailbox.org>  Wed, 24 Feb 2016 23:42:25 +0100
+ -- ChangZhuo Chen (陳昌倬) <czchen@debian.org>  Thu, 25 Feb 2016 23:18:22 +0800
 
 lximage-qt (0.4.0+20160108-1) unstable; urgency=medium
 
