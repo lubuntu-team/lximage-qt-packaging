@@ -1,3 +1,9 @@
+lximage-qt (0.5.0-2) experimental; urgency=medium
+
+  * Recommend qt5-image-formats-plugins 
+
+ -- Alf Gaida <agaida@siduction.org>  Tue, 27 Sep 2016 00:17:24 +0200
+
 lximage-qt (0.5.0-1) experimental; urgency=medium
 
   * Cherry-picking upstream release 0.5.0.

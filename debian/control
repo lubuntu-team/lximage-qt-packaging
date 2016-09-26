@@ -31,8 +31,10 @@ Package: lximage-qt
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
-Recommends: lxqtimage-qt-l10n
+Recommends: lxqtimage-qt-l10n,
+            qt5-image-formats-plugins
 Description: Image viewer for LXQt
- lximage-qt is a simple image viewer for LXQt.
+ A simple image viewer for LXQt. Additional file formats can be processed if
+ one install qt5-image-formats-plugins.
  .
  This package contain the program files.
