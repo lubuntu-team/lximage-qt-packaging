@@ -1,6 +1,3 @@
-# set visibility to hidden to hide symbols, unlesss they're exporeted manually in the code
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions")
-
 include_directories(
     ${X11_INCLUDE_DIR}
     ${XFIXES_INCLUDE_DIRS}
@@ -42,16 +39,23 @@ set(lximage-qt_UIS
 qt5_wrap_ui(lximage-qt_UI_H ${lximage-qt_UIS})
 
 # add translation for lximage-qt
-file(GLOB TS_FILES translations/*.ts)
-option(UPDATE_TRANSLATIONS "Update source translation translations/*.ts files")
-if(UPDATE_TRANSLATIONS)
-    qt5_create_translation(QM_FILES ${lximage-qt_SRCS} ${lximage-qt_UI_H} ${TS_FILES})
-else()
-    qt5_add_translation(QM_FILES ${TS_FILES})
-endif()
-
-add_custom_target (lximage-qt_translations DEPENDS ${QM_FILES})
-install(FILES ${QM_FILES} DESTINATION share/lximage-qt/translations)
+include(LXQtTranslateTs)
+lxqt_translate_ts(QM_FILES
+    UPDATE_TRANSLATIONS ${UPDATE_TRANSLATIONS}
+    SOURCES
+        ${lximage-qt_SRCS}
+        ${lximage-qt_UIS}
+    INSTALL_DIR
+        "${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/translations"
+    PULL_TRANSLATIONS
+        ${PULL_TRANSLATIONS}
+    CLEAN_TRANSLATIONS
+        ${CLEAN_TRANSLATIONS}
+    TRANSLATIONS_REPO
+        ${TRANSLATIONS_REPO}
+    TRANSLATIONS_REFSPEC
+        ${TRANSLATIONS_REFSPEC}
+)
 # prevent the generated files from being deleted during make clean
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM true)
 
@@ -74,7 +78,7 @@ add_definitions(
     -DLXIMAGE_VERSION="${LXIMAGE_VERSION}"
 )
 
-set(QT_LIBRARIES Qt5::Widgets Qt5::Core Qt5::DBus Qt5::PrintSupport Qt5::X11Extras)
+set(QT_LIBRARIES Qt5::Widgets Qt5::Core Qt5::DBus Qt5::PrintSupport Qt5::X11Extras Qt5::Svg)
 
 target_link_libraries(lximage-qt
     fm-qt
