@@ -1,3 +1,10 @@
+lximage-qt (0.5.0-4) unstable; urgency=medium
+
+  * Fixes Recommends lxqtimage-qt-l10n to lximage-qt-l10n
+    Thanks Armin Haas <armin@awawa.de> (Closes: #841426)
+
+ -- Alf Gaida <agaida@siduction.org>  Thu, 20 Oct 2016 18:08:37 +0200
+
 lximage-qt (0.5.0-3) unstable; urgency=medium
 
   * Cherry-picking upstream release 0.5.0.
