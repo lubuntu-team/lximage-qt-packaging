@@ -16,11 +16,21 @@ set(lximage-qt_SRCS
     application.cpp
     imageview.cpp
     modelfilter.cpp
-    job.cpp
     loadimagejob.cpp
     saveimagejob.cpp
     screenshotdialog.cpp
+    screenshotselectarea.cpp
+    screenshotselectareagraphicsview.cpp
     settings.cpp
+    graphicsscene.cpp
+
+    upload/imageshackprovider.cpp
+    upload/imageshackupload.cpp
+    upload/imgurprovider.cpp
+    upload/imgurupload.cpp
+    upload/provider.cpp
+    upload/upload.cpp
+    upload/uploaddialog.cpp
 )
 
 qt5_add_dbus_adaptor(lximage-qt_SRCS
@@ -35,6 +45,8 @@ set(lximage-qt_UIS
     mainwindow.ui
     preferencesdialog.ui
     screenshotdialog.ui
+
+    upload/uploaddialog.ui
 )
 qt5_wrap_ui(lximage-qt_UI_H ${lximage-qt_UIS})
 
@@ -64,7 +76,7 @@ include(LXQtTranslateDesktop)
 
 file(GLOB desktop_files_in ../data/*.desktop.in)
 lxqt_translate_desktop(desktop_files SOURCES ${desktop_files_in})
-install(FILES ${desktop_files} DESTINATION share/applications)
+install(FILES ${desktop_files} DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
 
 add_executable(lximage-qt
     ${lximage-qt_SRCS}
@@ -74,11 +86,11 @@ add_executable(lximage-qt
 )
 
 add_definitions(
-    -DLXIMAGE_DATA_DIR="${CMAKE_INSTALL_PREFIX}/share/lximage-qt"
+    -DLXIMAGE_DATA_DIR="${CMAKE_INSTALL_FULL_DATAROOTDIR}/lximage-qt"
     -DLXIMAGE_VERSION="${LXIMAGE_VERSION}"
 )
 
-set(QT_LIBRARIES Qt5::Widgets Qt5::Core Qt5::DBus Qt5::PrintSupport Qt5::X11Extras Qt5::Svg)
+set(QT_LIBRARIES Qt5::Widgets Qt5::Network Qt5::Core Qt5::DBus Qt5::PrintSupport Qt5::X11Extras Qt5::Svg)
 
 target_link_libraries(lximage-qt
     fm-qt
@@ -88,4 +100,4 @@ target_link_libraries(lximage-qt
     ${XFIXES_LIBRARIES}
 )
 
-install(TARGETS lximage-qt RUNTIME DESTINATION bin)
+install(TARGETS lximage-qt RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")

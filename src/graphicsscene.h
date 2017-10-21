@@ -1,6 +1,6 @@
 /*
     <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2013  PCMan <email>
+    Copyright (C) 2013  <copyright holder> <email>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,24 +17,30 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
+#ifndef LXIMAGE_GRAPHICSSCENE_H
+#define LXIMAGE_GRAPHICSSCENE_H
 
-#include "modelfilter.h"
+#include <QGraphicsScene>
+#include <QGraphicsSceneDragDropEvent>
 
-using namespace LxImage;
+namespace LxImage {
 
-ModelFilter::ModelFilter() {
-
-}
-
-ModelFilter::~ModelFilter() {
-
-}
-
-bool ModelFilter::filterAcceptsRow(const Fm::ProxyFolderModel* model, const std::shared_ptr<const Fm::FileInfo>& info) const
+class GraphicsScene : public QGraphicsScene
 {
-  Q_UNUSED(model)
+  Q_OBJECT
 
-  // filter out non-image files and formats that we don't support.
-  return info && info->isImage();
+public:
+  GraphicsScene(QObject *parent = 0);
+
+protected:
+  virtual void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
+  virtual void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+  virtual void dropEvent(QGraphicsSceneDragDropEvent* event);
+
+Q_SIGNALS:
+  void fileDropped(const QString file);
+};
+
 }
 
+#endif // LXIMAGE_GRAPHICSSCENE_H
