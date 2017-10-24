@@ -62,7 +62,7 @@ public:
 
   void pasteImage(QImage newImage);
 
-  FmPath* currentFile() const {
+  const Fm::FilePath & currentFile() const {
     return currentFile_;
   }
 
@@ -70,9 +70,9 @@ public:
   void applySettings();
 
 protected:
-  void loadImage(FmPath* filePath, QModelIndex index = QModelIndex());
-  void saveImage(FmPath* filePath); // save current image to a file
-  void loadFolder(FmPath* newFolderPath);
+  void loadImage(const Fm::FilePath & filePath, QModelIndex index = QModelIndex());
+  void saveImage(const Fm::FilePath & filePath); // save current image to a file
+  void loadFolder(const Fm::FilePath & newFolderPath);
   QString openFileName();
   QString openDirectory();
   QString saveFileName(QString defaultName = QString());
@@ -80,8 +80,8 @@ protected:
   virtual void resizeEvent(QResizeEvent *event);
   virtual void closeEvent(QCloseEvent *event);
 
-  void onImageLoaded(LoadImageJob* job);
-  void onImageSaved(SaveImageJob* job);
+  void onImageLoaded();
+  void onImageSaved();
 
   virtual bool eventFilter(QObject* watched, QEvent* event);
 private Q_SLOTS:
@@ -103,6 +103,7 @@ private Q_SLOTS:
   void on_actionFlipHorizontal_triggered();
   void on_actionCopy_triggered();
   void on_actionPaste_triggered();
+  void on_actionUpload_triggered();
 
   void on_actionShowThumbnails_triggered(bool checked);
   void on_actionFullScreen_triggered(bool checked);
@@ -123,17 +124,14 @@ private Q_SLOTS:
 
   void onThumbnailSelChanged(const QItemSelection & selected, const QItemSelection & deselected);
 
+  void onFileDropped(const QString path);
+
 private:
-  void onFolderLoaded(FmFolder* folder);
+  void onFolderLoaded();
   void updateUI();
   void setModified(bool modified);
-  QModelIndex indexFromPath(FmPath* filePath);
+  QModelIndex indexFromPath(const Fm::FilePath & filePath);
   QGraphicsItem* getGraphicsItem();
-
-  // GObject related signal handers and callbacks
-  static void _onFolderLoaded(FmFolder* folder, MainWindow* _this) {
-    _this->onFolderLoaded(folder);
-  }
 
 private:
   Ui::MainWindow ui;
@@ -141,13 +139,13 @@ private:
   QTimer* slideShowTimer_;
 
   QImage image_; // the image currently shown
-  FmPath* currentFile_; // path to current image file
+  Fm::FilePath currentFile_; // path to current image file
   // FmFileInfo* currentFileInfo_; // info of the current file, can be NULL
   bool imageModified_; // the current image is modified by rotation, flip, or others and needs to be saved
 
   // folder browsing
-  FmFolder* folder_;
-  FmPath* folderPath_;
+  std::shared_ptr<Fm::Folder> folder_;
+  Fm::FilePath folderPath_;
   Fm::FolderModel* folderModel_;
   Fm::ProxyFolderModel* proxyModel_;
   ModelFilter* modelFilter_;
@@ -161,6 +159,6 @@ private:
   SaveImageJob* saveJob_;
 };
 
-};
+}
 
 #endif // LXIMAGE_MAINWINDOW_H

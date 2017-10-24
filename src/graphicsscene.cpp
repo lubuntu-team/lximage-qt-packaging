@@ -18,45 +18,31 @@
  *
  */
 
-#ifndef LXIMAGE_JOB_H
-#define LXIMAGE_JOB_H
-
-#include <gio/gio.h>
+#include "graphicsscene.h"
+#include <QMimeData>
+#include <QUrl>
 
 namespace LxImage {
 
-class Job {
-public:
-  Job();
-  virtual ~Job();
-
-  void cancel() {
-    g_cancellable_cancel(cancellable_);
-  }
-  void start();
-
-  GError* error() const {
-    return error_;
-  }
-
-  bool isCancelled() const {
-    return bool(g_cancellable_is_cancelled(cancellable_));
-  }
-
-protected:
-  virtual bool run() = 0;
-  virtual void finish() = 0;
-
-protected:
-  GCancellable* cancellable_;
-  GError* error_;
-
-private:
-  static gboolean _jobThread(GIOSchedulerJob* job, GCancellable* cancellable, Job* pThis);
-  static gboolean _finish(Job* pThis);
-  static void _freeMe(Job* pThis);
-};
-
+GraphicsScene::GraphicsScene(QObject *parent):
+  QGraphicsScene (parent) {
 }
 
-#endif // LXIMAGE_JOB_H
+void GraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event) {
+  if(event->mimeData()->hasUrls())
+    event->acceptProposedAction();
+}
+
+void GraphicsScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event) {
+  if(event->mimeData()->hasUrls())
+    event->acceptProposedAction();
+}
+
+void GraphicsScene::dropEvent(QGraphicsSceneDragDropEvent* event) {
+  QList<QUrl> urlList = event->mimeData()->urls();
+  if(!urlList.isEmpty())
+    Q_EMIT fileDropped(urlList.first().toLocalFile());
+  event->acceptProposedAction();
+}
+
+}
