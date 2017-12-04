@@ -9,17 +9,17 @@ Build-Depends: debhelper (>= 10),
                libexif-dev,
                libglib2.0-dev,
                libfm-dev,
-               libfm-qt-dev (>= 0.11.2),
+               libfm-qt-dev (>= 0.12.0),
                libkf5windowsystem-dev,
                libmenu-cache-dev,
                libqt5svg5-dev,
                libqt5x11extras5-dev,
                libx11-dev,
                libxfixes-dev,
-               lxqt-build-tools (>= 0.3.0)
-Standards-Version: 3.9.8
-Vcs-Browser: https://anonscm.debian.org/cgit/pkg-lxqt/lximage-qt.git/?h=debian/sid
-Vcs-Git: https://anonscm.debian.org/git/pkg-lxqt/lximage-qt.git -b debian/sid
+               lxqt-build-tools (>= 0.4.0),
+Standards-Version: 4.1.1
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-lxqt/lximage-qt.git/?h=debian/experimental
+Vcs-Git: https://anonscm.debian.org/git/pkg-lxqt/lximage-qt.git -b debian/experimental
 Homepage: https://github.com/lxde/lximage-qt
 
 Package: lximage-qt
