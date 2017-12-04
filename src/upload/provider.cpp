@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2013  PCMan <email>
+    LxImage - image viewer and screenshot tool for lxqt
+    Copyright (C) 2017  Nathan Osman <nathan@quickmediasolutions.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,24 +17,8 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-
-#include "modelfilter.h"
+#include "provider.h"
 
 using namespace LxImage;
 
-ModelFilter::ModelFilter() {
-
-}
-
-ModelFilter::~ModelFilter() {
-
-}
-
-bool ModelFilter::filterAcceptsRow(const Fm::ProxyFolderModel* model, const std::shared_ptr<const Fm::FileInfo>& info) const
-{
-  Q_UNUSED(model)
-
-  // filter out non-image files and formats that we don't support.
-  return info && info->isImage();
-}
-
+QNetworkAccessManager Provider::sManager;

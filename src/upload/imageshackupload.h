@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2013  PCMan <email>
+    LxImage - image viewer and screenshot tool for lxqt
+    Copyright (C) 2017  Nathan Osman <nathan@quickmediasolutions.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,24 +17,29 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
+#ifndef LXIMAGE_IMAGESHACKUPLOAD_H
+#define LXIMAGE_IMAGESHACKUPLOAD_H
 
-#include "modelfilter.h"
+#include "upload.h"
 
-using namespace LxImage;
+namespace LxImage {
 
-ModelFilter::ModelFilter() {
-
-}
-
-ModelFilter::~ModelFilter() {
-
-}
-
-bool ModelFilter::filterAcceptsRow(const Fm::ProxyFolderModel* model, const std::shared_ptr<const Fm::FileInfo>& info) const
+/**
+ * @brief Upload to ImageShack's API
+ */
+class ImageShackUpload : public Upload
 {
-  Q_UNUSED(model)
+    Q_OBJECT
 
-  // filter out non-image files and formats that we don't support.
-  return info && info->isImage();
+public:
+
+    explicit ImageShackUpload(QNetworkReply *reply);
+
+protected:
+
+    virtual void processReply(const QByteArray &data);
+};
+
 }
 
+#endif // LXIMAGE_IMAGESHACKUPLOAD_H
