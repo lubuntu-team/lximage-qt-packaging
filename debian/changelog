@@ -1,3 +1,11 @@
+lximage-qt (0.6.0-3) unstable; urgency=medium
+
+  * Bumped Standards to 4.1.2
+  * Removed branch from VCS fields
+  * Removed debian/gbp.conf
+
+ -- Alf Gaida <agaida@siduction.org>  Thu, 14 Dec 2017 17:28:58 +0100
+
 lximage-qt (0.6.0-2) unstable; urgency=medium
 
   * Transition to unstable 
