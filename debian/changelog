@@ -1,3 +1,15 @@
+lximage-qt (0.6.0-4) unstable; urgency=medium
+
+  * Bumped compat to 11
+  * Bumped debhelper to >= 11~
+  * Bumped Standards to 4.1.4, no changes needed
+  * Changed VCS fields for salsa
+  * Changed Homepage, Source and watch to lxqt
+  * Bumped years in copyright
+  * Removed trailing whitespaces in changelog
+
+ -- Alf Gaida <agaida@siduction.org>  Sun, 29 Apr 2018 12:36:49 +0200
+
 lximage-qt (0.6.0-3) unstable; urgency=medium
 
   * Bumped Standards to 4.1.2
@@ -8,7 +20,7 @@ lximage-qt (0.6.0-3) unstable; urgency=medium
 
 lximage-qt (0.6.0-2) unstable; urgency=medium
 
-  * Transition to unstable 
+  * Transition to unstable
 
  -- Alf Gaida <agaida@siduction.org>  Mon, 04 Dec 2017 20:25:33 +0100
 
@@ -48,7 +60,7 @@ lximage-qt (0.5.0-4) unstable; urgency=medium
 lximage-qt (0.5.0-3) unstable; urgency=medium
 
   * Cherry-picking upstream release 0.5.0.
-  * Bumped Standards to 3.9.8, no changes needed 
+  * Bumped Standards to 3.9.8, no changes needed
   * Bumped compat to 10
   * Removed --parallel from rules, standard compat 10
   * Bumped minimum version debhelper (>= 10)
@@ -58,12 +70,12 @@ lximage-qt (0.5.0-3) unstable; urgency=medium
   * Added build dependency libqt5svg5-dev
   * Added build dependency libqt5xdg-dev (>= 2.0.0)
   * Added Recommends lxqtimage-qt-l10n
-  * Added Recommends qt5-image-formats-plugins 
+  * Added Recommends qt5-image-formats-plugins
   * Fixed copyrights Format field to https
   * Dropped patches, applied upstream
   * Added translation control to rules
   * Set CMAKE_BUILD_TYPE=RelWithDebInfo
-  * Exported LC_ALL=C.UTF-8, make builds reproducible  
+  * Exported LC_ALL=C.UTF-8, make builds reproducible
 
  -- Alf Gaida <agaida@siduction.org>  Tue, 18 Oct 2016 21:40:48 +0200
 
@@ -86,9 +98,9 @@ lximage-qt (0.4.0+20160108-2) unstable; urgency=medium
 
 lximage-qt (0.4.0+20160108-1) unstable; urgency=medium
 
-  * Cherry-picked new upstream version 0.4.0+20160108. 
+  * Cherry-picked new upstream version 0.4.0+20160108.
   * Removed outdated build dependency libfm-qt5-dev,
-  * Added build dependencies libfm-qt-dev and libmenu-cache-dev. 
+  * Added build dependencies libfm-qt-dev and libmenu-cache-dev.
   * Bump Standards to 3.9.7
   * Changed the VCS-fields to https://
   * Fix Years in copyright
@@ -98,7 +110,7 @@ lximage-qt (0.4.0+20160108-1) unstable; urgency=medium
 
 lximage-qt (0.4.0+20151117-2) unstable; urgency=medium
 
-  * Remove dbg package in favor of dbgsym. 
+  * Remove dbg package in favor of dbgsym.
 
  -- Alf Gaida <agaida@siduction.org>  Sat, 26 Dec 2015 17:26:11 +0100
 
