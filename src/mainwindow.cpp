@@ -39,7 +39,6 @@
 #include <QDesktopWidget>
 #include <QGraphicsSvgItem>
 #include "application.h"
-#include <libfm-qt/path.h>
 #include <libfm-qt/folderview.h>
 #include <libfm-qt/filepropsdialog.h>
 #include <libfm-qt/fileoperation.h>
@@ -143,9 +142,9 @@ MainWindow::~MainWindow() {
 
 void MainWindow::on_actionAbout_triggered() {
   QMessageBox::about(this, tr("About"),
-                     tr("LXImage - a simple and fast image viewer\n\n"
+                     tr("LXImage-Qt - a simple and fast image viewer\n\n"
                      "Copyright (C) 2013\n"
-                     "LXDE Project: http://lxde.org/\n\n"
+                     "LXQt Project: https://lxqt.org/\n\n"
                      "Authors:\n"
                      "Hong Jen Yee (PCMan) <pcman.tw@gmail.com>"));
 }
@@ -906,7 +905,8 @@ void MainWindow::changeEvent(QEvent* event) {
       // is disabled. We needs to add the actions to the main window manually to enable the
       // shortcuts again.
       ui.menubar->hide();
-      Q_FOREACH(QAction* action, ui.menubar->actions()) {
+      const auto actions = ui.menubar->actions();
+      for(QAction* action : qAsConst(actions)) {
         if(!action->shortcut().isEmpty())
           addAction(action);
       }
@@ -917,7 +917,8 @@ void MainWindow::changeEvent(QEvent* event) {
       ui.view->setFrameStyle(QFrame::StyledPanel|QFrame::Sunken);
       ui.view->setBackgroundBrush(QBrush(app->settings().bgColor()));
       // now we're going to re-enable the menu, so remove the actions previously added.
-      Q_FOREACH(QAction* action, ui.menubar->actions()) {
+      const auto actions_ = ui.menubar->actions();
+      for(QAction* action : qAsConst(actions_)) {
         if(!action->shortcut().isEmpty())
           removeAction(action);
       }
