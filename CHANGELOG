@@ -1,7 +1,22 @@
 
-lximage-qt-0.6.0 / 2017-10-21
+lximage-qt-0.7.0 / 2018-05-21
 =============================
 
+  * Bumped minor version to 7
+  * Spanish translation update
+  * Just made it compilable again
+  * Removed not needed release.sh
+  * CMake: Prevent in-source builds
+  * fix some http->https
+  * Fix some mentions of LXDE
+  * Drop Qt foreach
+  * cmake: Handle CMP0071
+  * Add Spanish desktop entries
+
+0.6.0 / 2017-10-21
+==================
+
+  * Release 0.6.0: Update changelog
   * Add ImageShack upload provider.
   * Fix warnings issued by GCC and Clang.
   * Ensure file is closed when upload finishes.

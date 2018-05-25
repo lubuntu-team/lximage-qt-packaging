@@ -1,3 +1,14 @@
+lximage-qt (0.7.0-1) experimental; urgency=medium
+
+  * Cherry-picking upstream release 0.7.0.
+  * Removed build dependency libfm-dev
+  * Removed build dependency libmenu-cache-dev
+  * Bumped build dependency libfm-qt-def to >= 0.13.0~
+  * Bumped build dependency lxqt-build-tools to >= 0.5.0~
+  * Moved debian/.gitignore to ./.gitignore
+
+ -- Alf Gaida <agaida@siduction.org>  Fri, 25 May 2018 19:36:29 +0200
+
 lximage-qt (0.6.0-4) unstable; urgency=medium
 
   * Bumped compat to 11

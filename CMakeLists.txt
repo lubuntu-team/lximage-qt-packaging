@@ -4,13 +4,14 @@ project(lximage-qt)
 include(GNUInstallDirs)
 
 set(MAJOR_VERSION 0)
-set(MINOR_VERSION 6)
+set(MINOR_VERSION 7)
 set(PATCH_VERSION 0)
 set(LXIMAGE_VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION})
 
-set(LXQTBT_MINIMUM_VERSION "0.4.0")
+set(LXQTBT_MINIMUM_VERSION "0.5.0")
 
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
@@ -26,6 +27,7 @@ find_package(lxqt-build-tools ${LXQTBT_MINIMUM_VERSION} REQUIRED)
 find_package(Exif REQUIRED)
 message(STATUS "Building with Qt ${Qt5Core_VERSION}")
 
+include(LXQtPreventInSourceBuilds)
 include(LXQtCompilerSettings NO_POLICY_SCOPE)
 
 # TODO: make the X11 stuff optional.
