@@ -1,22 +1,22 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2013  <copyright holder> <email>
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-*/
-
+ * LXImage-Qt - a simple and fast image viewer
+ * Copyright (C) 2013  PCMan <pcman.tw@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ */
 
 #include "imageview.h"
 #include <QWheelEvent>
@@ -28,6 +28,9 @@
 #include <QLabel>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsSvgItem>
+#include <QPainter>
+#include <QPainterPath>
+#include <QtMath>
 
 #define CURSOR_HIDE_DELY 3000
 
@@ -42,7 +45,8 @@ ImageView::ImageView(QWidget* parent):
   cursorTimer_(nullptr),
   scaleFactor_(1.0),
   autoZoomFit_(false),
-  isSVG(false) {
+  isSVG(false),
+  currentTool(ToolNone) {
 
   setViewportMargins(0, 0, 0, 0);
   setContentsMargins(0, 0, 0, 0);
@@ -101,13 +105,72 @@ void ImageView::mouseDoubleClickEvent(QMouseEvent* event) {
 }
 
 void ImageView::mousePressEvent(QMouseEvent * event) {
-  QGraphicsView::mousePressEvent(event);
-  if(cursorTimer_) cursorTimer_->stop();
+  if (currentTool == ToolNone) {
+    QGraphicsView::mousePressEvent(event);
+    if(cursorTimer_) cursorTimer_->stop();
+  } else {
+    startPoint = mapToScene(event->pos()).toPoint();
+  }
 }
 
 void ImageView::mouseReleaseEvent(QMouseEvent* event) {
-  QGraphicsView::mouseReleaseEvent(event);
-  if(cursorTimer_) cursorTimer_->start(CURSOR_HIDE_DELY);
+  if (currentTool == ToolNone) {
+    QGraphicsView::mouseReleaseEvent(event);
+    if(cursorTimer_) cursorTimer_->start(CURSOR_HIDE_DELY);
+  } else if (!image_.isNull()) {
+    QPoint endPoint = mapToScene(event->pos()).toPoint();
+
+    QPainter painter(&image_);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::red, 5));
+
+    switch (currentTool) {
+    case ToolArrow:
+      drawArrow(painter, startPoint, endPoint, M_PI / 8, 25);
+      break;
+    case ToolRectangle:
+      painter.drawRect(QRect(startPoint, endPoint));
+      break;
+    case ToolCircle:
+      painter.drawEllipse(QRect(startPoint, endPoint));
+      break;
+    case ToolNumber:
+    {
+      // Set the font
+      QFont font;
+      font.setPixelSize(32);
+      painter.setFont(font);
+
+      // Calculate the dimensions of the text
+      QString text = QString("%1").arg(nextNumber++);
+      QRectF textRect = painter.boundingRect(image_.rect(), 0, text);
+      textRect.moveTo(endPoint);
+
+      // Calculate the dimensions of the circle
+      qreal radius = qSqrt(textRect.width() * textRect.width() +
+                           textRect.height() * textRect.height()) / 2;
+      QRectF circleRect(textRect.left() + (textRect.width() / 2 - radius),
+                        textRect.top() + (textRect.height() / 2 - radius),
+                        radius * 2, radius * 2);
+
+      // Draw the path
+      QPainterPath path;
+      path.addEllipse(circleRect);
+      painter.fillPath(path, Qt::red);
+      painter.drawPath(path);
+
+      // Draw the text
+      painter.setPen(Qt::white);
+      painter.drawText(textRect, Qt::AlignCenter, text);
+
+      break;
+    }
+    default:
+      break;
+    }
+    painter.end();
+    generateCache();
+  }
 }
 
 void ImageView::mouseMoveEvent(QMouseEvent* event) {
@@ -175,7 +238,7 @@ void ImageView::zoomOriginal() {
   queueGenerateCache();
 }
 
-void ImageView::setImage(QImage image, bool show) {
+void ImageView::setImage(const QImage& image, bool show) {
   if(show && (gifMovie_ || isSVG)) { // a gif animation or SVG file was shown before
     scene_->clear();
     isSVG = false;
@@ -208,9 +271,12 @@ void ImageView::setImage(QImage image, bool show) {
   if(autoZoomFit_)
     zoomFit();
   queueGenerateCache();
+
+  // clear the numbering
+  nextNumber = 1;
 }
 
-void ImageView::setGifAnimation(QString fileName) {
+void ImageView::setGifAnimation(const QString& fileName) {
   /* the built-in gif reader gives the first frame, which won't
      be shown but is used for tracking position and dimensions */
   image_ = QImage(fileName);
@@ -247,7 +313,7 @@ void ImageView::setGifAnimation(QString fileName) {
   queueGenerateCache(); // deletes the cache timer in this case
 }
 
-void ImageView::setSVG(QString fileName) {
+void ImageView::setSVG(const QString& fileName) {
   image_ = QImage(fileName); // for tracking position and dimensions
   if(image_.isNull()) {
     if(imageItem_) {
@@ -385,7 +451,7 @@ void ImageView::blankCursor() {
 
 void ImageView::hideCursor(bool enable) {
   if(enable) {
-    if(cursorTimer_) delete cursorTimer_;
+    delete cursorTimer_;
     cursorTimer_ = new QTimer(this);
     cursorTimer_->setSingleShot(true);
     connect(cursorTimer_, &QTimer::timeout, this, &ImageView::blankCursor);
@@ -399,6 +465,41 @@ void ImageView::hideCursor(bool enable) {
     if(viewport()->cursor().shape() == Qt::BlankCursor)
         viewport()->setCursor(Qt::OpenHandCursor);
   }
+}
+
+void ImageView::activateTool(Tool tool) {
+  currentTool = tool;
+  viewport()->setCursor(tool == ToolNone ?
+                            Qt::OpenHandCursor :
+                            Qt::CrossCursor);
+}
+
+void ImageView::drawArrow(QPainter &painter,
+                          const QPoint &start,
+                          const QPoint &end,
+                          qreal tipAngle,
+                          int tipLen) const
+{
+  // Draw the line
+  painter.drawLine(start, end);
+
+  // Calculate the angle of the line
+  QPoint delta = end - start;
+  qreal angle = qAtan2(-delta.y(), delta.x()) - M_PI / 2;
+
+  // Calculate the points of the lines that converge at the tip
+  QPoint tip1(
+    static_cast<int>(qSin(angle + tipAngle) * tipLen),
+    static_cast<int>(qCos(angle + tipAngle) * tipLen)
+  );
+  QPoint tip2(
+    static_cast<int>(qSin(angle - tipAngle) * tipLen),
+    static_cast<int>(qCos(angle - tipAngle) * tipLen)
+  );
+
+  // Draw the two lines
+  painter.drawLine(end, end + tip1);
+  painter.drawLine(end, end + tip2);
 }
 
 } // namespace LxImage

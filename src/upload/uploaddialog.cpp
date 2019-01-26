@@ -1,23 +1,26 @@
 /*
-    LxImage - image viewer and screenshot tool for lxqt
-    Copyright (C) 2017  Nathan Osman <nathan@quickmediasolutions.com>
+ * LXImage-Qt - a simple and fast image viewer
+ * Copyright (C) 2013  PCMan <pcman.tw@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ */
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-*/
-
+#include <QClipboard>
 #include <QComboBox>
+#include <QGuiApplication>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QProgressBar>
@@ -25,6 +28,7 @@
 #include <QVariant>
 
 #include "imageshackprovider.h"
+#include "imgbbprovider.h"
 #include "imgurprovider.h"
 #include "provider.h"
 #include "upload.h"
@@ -33,6 +37,7 @@
 using namespace LxImage;
 
 ImgurProvider gImgurProvider;
+ImgBBProvider gImgBBProvider;
 ImageShackProvider gImageShackProvider;
 
 UploadDialog::UploadDialog(QWidget *parent, const QString &filename)
@@ -45,6 +50,7 @@ UploadDialog::UploadDialog(QWidget *parent, const QString &filename)
 
     // Populate the list of providers
     ui.providerComboBox->addItem(tr("Imgur"), QVariant::fromValue(&gImgurProvider));
+    ui.providerComboBox->addItem(tr("ImgBB"), QVariant::fromValue(&gImgBBProvider));
     ui.providerComboBox->addItem(tr("ImageShack"), QVariant::fromValue(&gImageShackProvider));
 
     updateUi();
@@ -63,6 +69,11 @@ void UploadDialog::on_actionButton_clicked()
         accept();
         break;
     }
+}
+
+void UploadDialog::on_copyButton_clicked()
+{
+    QGuiApplication::clipboard()->setText(ui.linkLineEdit->text());
 }
 
 void UploadDialog::start()
@@ -87,6 +98,7 @@ void UploadDialog::start()
     // If the request completes, show the link to the user
     connect(mUpload, &Upload::completed, [this](const QString &url) {
         ui.linkLineEdit->setText(url);
+        ui.linkLineEdit->selectAll();
 
         mState = Completed;
         updateUi();
@@ -114,6 +126,7 @@ void UploadDialog::updateUi()
     ui.providerComboBox->setVisible(mState == SelectProvider);
     ui.progressBar->setVisible(mState == UploadInProgress);
     ui.linkLineEdit->setVisible(mState == Completed);
+    ui.copyButton->setVisible(mState == Completed);
 
     // Reset the progress bar to zero
     ui.progressBar->setValue(0);

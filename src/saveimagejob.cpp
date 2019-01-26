@@ -1,22 +1,22 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2013  PCMan <email>
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-*/
-
+ * LXImage-Qt - a simple and fast image viewer
+ * Copyright (C) 2013  PCMan <pcman.tw@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ */
 
 #include "saveimagejob.h"
 #include "mainwindow.h"
@@ -53,7 +53,7 @@ void SaveImageJob::exec() {
   while (act == ErrorAction::RETRY && !isCancelled())
   {
     error.reset();
-    if (nullptr == (fileStream = g_file_replace(path_.gfile().get(), NULL, false, G_FILE_CREATE_NONE, cancellable().get(), &error)))
+    if (nullptr == (fileStream = g_file_replace(path_.gfile().get(), nullptr, false, G_FILE_CREATE_NONE, cancellable().get(), &error)))
     {
       act = emitError(error);
       continue;
@@ -66,10 +66,10 @@ void SaveImageJob::exec() {
       g_output_stream_write_all(outputStream,
                                 imageBuffer.data().constData(),
                                 imageBuffer.size(),
-                                NULL,
+                                nullptr,
                                 cancellable().get(),
                                 &error);
-      g_output_stream_close(outputStream, NULL, NULL);
+      g_output_stream_close(outputStream, nullptr, nullptr);
       if (!error)
       {
         // successfully written

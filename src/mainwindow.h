@@ -1,22 +1,22 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2013  <copyright holder> <email>
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-*/
-
+ * LXImage-Qt - a simple and fast image viewer
+ * Copyright (C) 2013  PCMan <pcman.tw@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ */
 
 #ifndef LXIMAGE_MAINWINDOW_H
 #define LXIMAGE_MAINWINDOW_H
@@ -27,7 +27,9 @@
 #include "imageview.h"
 #include <QImage>
 
-#include <libfm/fm-folder.h>
+#include <QTableWidget>
+#include <QLabel>
+
 #include <libfm-qt/foldermodel.h>
 #include <libfm-qt/proxyfoldermodel.h>
 #include <gio/gio.h>
@@ -54,7 +56,7 @@ public:
   MainWindow();
   virtual ~MainWindow();
 
-  void openImageFile(QString fileName);
+  void openImageFile(const QString& fileName);
 
   QImage image() const {
     return image_;
@@ -67,6 +69,7 @@ public:
   }
 
   void setShowThumbnails(bool show);
+  void setShowExifData(bool show);
   void applySettings();
 
 protected:
@@ -75,7 +78,7 @@ protected:
   void loadFolder(const Fm::FilePath & newFolderPath);
   QString openFileName();
   QString openDirectory();
-  QString saveFileName(QString defaultName = QString());
+  QString saveFileName(const QString& defaultName = QString());
   virtual void changeEvent(QEvent * event);
   virtual void resizeEvent(QResizeEvent *event);
   virtual void closeEvent(QCloseEvent *event);
@@ -89,6 +92,7 @@ private Q_SLOTS:
 
   void on_actionOpenFile_triggered();
   void on_actionOpenDirectory_triggered();
+  void on_actionReload_triggered();
   void on_actionNewWindow_triggered();
   void on_actionSave_triggered();
   void on_actionSaveAs_triggered();
@@ -106,6 +110,7 @@ private Q_SLOTS:
   void on_actionUpload_triggered();
 
   void on_actionShowThumbnails_triggered(bool checked);
+  void on_actionShowExifData_triggered(bool checked);
   void on_actionFullScreen_triggered(bool checked);
   void on_actionSlideShow_triggered(bool checked);
 
@@ -119,8 +124,14 @@ private Q_SLOTS:
   void on_actionOriginalSize_triggered();
   void on_actionZoomFit_triggered();
 
+  void on_actionDrawNone_triggered();
+  void on_actionDrawArrow_triggered();
+  void on_actionDrawRectangle_triggered();
+  void on_actionDrawCircle_triggered();
+  void on_actionDrawNumber_triggered();
+
   void onContextMenu(QPoint pos);
-  void onExitFullscreen();
+  void onKeyboardEscape();
 
   void onThumbnailSelChanged(const QItemSelection & selected, const QItemSelection & deselected);
 
@@ -153,6 +164,14 @@ private:
 
   QDockWidget* thumbnailsDock_;
   Fm::FolderView* thumbnailsView_;
+
+  // EXIF Data
+  QDockWidget* exifDataDock_ = nullptr;
+  QWidget* exifDataDockView_;
+  QVBoxLayout* exifDataDockViewContent_;
+  QTableWidget* exifDataContentTable_;
+
+  QMap<QString, QString> exifData_;
 
   // multi-threading loading of images
   LoadImageJob* loadJob_;
