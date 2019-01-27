@@ -1,22 +1,22 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2013  PCMan <email>
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-*/
-
+ * LXImage-Qt - a simple and fast image viewer
+ * Copyright (C) 2013  PCMan <pcman.tw@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ */
 
 #include "loadimagejob.h"
 #include "mainwindow.h"
@@ -32,6 +32,19 @@ LoadImageJob::LoadImageJob(const Fm::FilePath & filePath):
 }
 
 LoadImageJob::~LoadImageJob() {
+}
+
+void readExifEntry(ExifEntry* ee, void* user_data) {
+    QMap<QString, QString>& exifData = *reinterpret_cast<QMap<QString, QString>*>(user_data);
+    char c[100];
+    auto ifd = exif_entry_get_ifd(ee);
+    QString key = exif_tag_get_title_in_ifd(ee->tag, ifd);
+    QString value = exif_entry_get_value(ee, c, 100);
+    exifData.insert(key, value);
+}
+
+void readExifContent(ExifContent* ec, void* user_data) {
+  exif_content_foreach_entry(ec, readExifEntry, user_data);
 }
 
 // This is called from the worker thread, not main thread
@@ -61,9 +74,9 @@ void LoadImageJob::exec() {
       if(readSize == -1 || readSize == 0) // error or EOF
         break;
       // append the bytes read to the image buffer
-        imageBuffer.append(buffer, readSize);
+      imageBuffer.append(buffer, readSize);
     }
-    g_input_stream_close(inputStream, NULL, NULL);
+    g_input_stream_close(inputStream, nullptr, nullptr);
 
     if (!error)
       break; // everything read or cancel requested
@@ -79,7 +92,7 @@ void LoadImageJob::exec() {
       // check if this file is a jpeg file
       // FIXME: can we use FmFileInfo instead if it's available?
       const Fm::CStrPtr basename = path_.baseName();
-      const Fm::CStrPtr mime_type{g_content_type_guess(basename.get(), NULL, 0, NULL)};
+      const Fm::CStrPtr mime_type{g_content_type_guess(basename.get(), nullptr, 0, nullptr)};
       if(mime_type && strcmp(mime_type.get(), "image/jpeg") == 0) { // this is a jpeg file
         // use libexif to extract additional info embedded in jpeg files
         std::unique_ptr<ExifLoader, decltype (&exif_loader_unref)> exif_loader{exif_loader_new(), &exif_loader_unref};
@@ -116,8 +129,10 @@ void LoadImageJob::exec() {
               transform.rotate(rotate_degrees);
               image_ = image_.transformed(transform, Qt::SmoothTransformation);
             }
-            // TODO: handle other EXIF tags as well
           }
+
+          // handle other EXIF tags as well
+          exif_data_foreach_content(exif_data.get(), readExifContent, &exifData_);
         }
       }
     }

@@ -1,22 +1,22 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2013  PCMan <email>
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-*/
-
+ * LXImage-Qt - a simple and fast image viewer
+ * Copyright (C) 2013  PCMan <pcman.tw@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ */
 
 #include "preferencesdialog.h"
 #include "application.h"
@@ -75,18 +75,18 @@ void PreferencesDialog::accept() {
   app->applySettings();
 }
 
-static void findIconThemesInDir(QHash<QString, QString>& iconThemes, QString dirName) {
+static void findIconThemesInDir(QHash<QString, QString>& iconThemes, const QString& dirName) {
   QDir dir(dirName);
   const QStringList subDirs = dir.entryList(QDir::AllDirs);
   GKeyFile* kf = g_key_file_new();
-  for(QString subDir : subDirs) {
+  for(const QString& subDir : subDirs) {
     QString indexFile = dirName % '/' % subDir % "/index.theme";
-    if(g_key_file_load_from_file(kf, indexFile.toLocal8Bit().constData(), GKeyFileFlags(0), NULL)) {
+    if(g_key_file_load_from_file(kf, indexFile.toLocal8Bit().constData(), GKeyFileFlags(0), nullptr)) {
       // FIXME: skip hidden ones
       // icon theme must have this key, so it has icons if it has this key
       // otherwise, it might be a cursor theme or any other kind of theme.
-      if(g_key_file_has_key(kf, "Icon Theme", "Directories", NULL)) {
-        char* dispName = g_key_file_get_locale_string(kf, "Icon Theme", "Name", NULL, NULL);
+      if(g_key_file_has_key(kf, "Icon Theme", "Directories", nullptr)) {
+        char* dispName = g_key_file_get_locale_string(kf, "Icon Theme", "Name", nullptr, nullptr);
         // char* comment = g_key_file_get_locale_string(kf, "Icon Theme", "Comment", NULL, NULL);
         iconThemes[subDir] = dispName;
         g_free(dispName);

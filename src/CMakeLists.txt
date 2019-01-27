@@ -23,14 +23,19 @@ set(lximage-qt_SRCS
     screenshotselectareagraphicsview.cpp
     settings.cpp
     graphicsscene.cpp
+    mrumenu.cpp
 
     upload/imageshackprovider.cpp
     upload/imageshackupload.cpp
+    upload/imgbbprovider.cpp
+    upload/imgbbupload.cpp
     upload/imgurprovider.cpp
     upload/imgurupload.cpp
     upload/provider.cpp
     upload/upload.cpp
     upload/uploaddialog.cpp
+
+    resource.qrc
 )
 
 qt5_add_dbus_adaptor(lximage-qt_DBUS_SRCS
@@ -60,15 +65,8 @@ lxqt_translate_ts(QM_FILES
         ${lximage-qt_UIS}
     INSTALL_DIR
         "${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/translations"
-    PULL_TRANSLATIONS
-        ${PULL_TRANSLATIONS}
-    CLEAN_TRANSLATIONS
-        ${CLEAN_TRANSLATIONS}
-    TRANSLATIONS_REPO
-        ${TRANSLATIONS_REPO}
-    TRANSLATIONS_REFSPEC
-        ${TRANSLATIONS_REFSPEC}
 )
+
 # prevent the generated files from being deleted during make clean
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM true)
 
@@ -89,7 +87,6 @@ add_executable(lximage-qt
 add_definitions(
     -DLXIMAGE_DATA_DIR="${CMAKE_INSTALL_FULL_DATAROOTDIR}/lximage-qt"
     -DLXIMAGE_VERSION="${LXIMAGE_VERSION}"
-    -DQT_NO_FOREACH
 )
 
 set(QT_LIBRARIES Qt5::Widgets Qt5::Network Qt5::Core Qt5::DBus Qt5::PrintSupport Qt5::X11Extras Qt5::Svg)
@@ -99,7 +96,7 @@ target_link_libraries(lximage-qt
     ${QT_LIBRARIES}
     ${EXIF_LIBRARIES}
     ${X11_LIBRARIES}
-    ${XFIXES_LIBRARIES}
+    ${XFIXES_LDFLAGS}
 )
 
 install(TARGETS lximage-qt RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")

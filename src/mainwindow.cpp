@@ -1,24 +1,25 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2013 - 2014  Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-*/
-
+ * LXImage-Qt - a simple and fast image viewer
+ * Copyright (C) 2013  PCMan <pcman.tw@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ */
 
 #include "mainwindow.h"
+#include <QActionGroup>
 #include <QDir>
 #include <QFileInfo>
 #include <QMessageBox>
@@ -38,12 +39,15 @@
 #include <QScrollBar>
 #include <QDesktopWidget>
 #include <QGraphicsSvgItem>
+#include <QHeaderView>
+
 #include "application.h"
 #include <libfm-qt/folderview.h>
 #include <libfm-qt/filepropsdialog.h>
 #include <libfm-qt/fileoperation.h>
 #include <libfm-qt/folderitemdelegate.h>
 
+#include "mrumenu.h"
 #include "upload/uploaddialog.h"
 
 using namespace LxImage;
@@ -109,22 +113,35 @@ MainWindow::MainWindow():
   contextMenu_->addAction(ui.actionFlipVertical);
   contextMenu_->addAction(ui.actionFlipVertical);
 
-  // create shortcuts
+  // Open images when MRU items are clicked
+  connect(ui.menuRecently_Opened_Files, &MruMenu::itemClicked, this, &MainWindow::onFileDropped);
+
+  // Create an action group for the annotation tools
+  QActionGroup *annotationGroup = new QActionGroup(this);
+  annotationGroup->addAction(ui.actionDrawNone);
+  annotationGroup->addAction(ui.actionDrawArrow);
+  annotationGroup->addAction(ui.actionDrawRectangle);
+  annotationGroup->addAction(ui.actionDrawCircle);
+  annotationGroup->addAction(ui.actionDrawNumber);
+  ui.actionDrawNone->setChecked(true);
+
+  // create keyboard shortcuts
   QShortcut* shortcut = new QShortcut(Qt::Key_Left, this);
+  connect(shortcut, &QShortcut::activated, this, &MainWindow::on_actionPrevious_triggered);
+  shortcut = new QShortcut(Qt::Key_Backspace, this);
   connect(shortcut, &QShortcut::activated, this, &MainWindow::on_actionPrevious_triggered);
   shortcut = new QShortcut(Qt::Key_Right, this);
   connect(shortcut, &QShortcut::activated, this, &MainWindow::on_actionNext_triggered);
+  shortcut = new QShortcut(Qt::Key_Space, this);
+  connect(shortcut, &QShortcut::activated, this, &MainWindow::on_actionNext_triggered);
   shortcut = new QShortcut(Qt::Key_Escape, this);
-  connect(shortcut, &QShortcut::activated, this, &MainWindow::onExitFullscreen);
+  connect(shortcut, &QShortcut::activated, this, &MainWindow::onKeyboardEscape);
 }
 
 MainWindow::~MainWindow() {
-  if(slideShowTimer_)
-    delete slideShowTimer_;
-  if(thumbnailsView_)
-    delete thumbnailsView_;
-  if(thumbnailsDock_)
-    delete thumbnailsDock_;
+  delete slideShowTimer_;
+  delete thumbnailsView_;
+  delete thumbnailsDock_;
 
   if(loadJob_) {
     loadJob_->cancel();
@@ -169,6 +186,27 @@ void MainWindow::on_actionZoomOut_triggered() {
   ui.view->zoomOut();
 }
 
+void MainWindow::on_actionDrawNone_triggered() {
+  ui.view->activateTool(ImageView::ToolNone);
+}
+
+void MainWindow::on_actionDrawArrow_triggered() {
+  ui.view->activateTool(ImageView::ToolArrow);
+}
+
+void MainWindow::on_actionDrawRectangle_triggered() {
+  ui.view->activateTool(ImageView::ToolRectangle);
+}
+
+void MainWindow::on_actionDrawCircle_triggered() {
+  ui.view->activateTool(ImageView::ToolCircle);
+}
+
+void MainWindow::on_actionDrawNumber_triggered() {
+  ui.view->activateTool(ImageView::ToolNumber);
+}
+
+
 void MainWindow::onFolderLoaded() {
   // if currently we're showing a file, get its index in the folder now
   // since the folder is fully loaded.
@@ -185,7 +223,7 @@ void MainWindow::onFolderLoaded() {
     on_actionFirst_triggered();
 }
 
-void MainWindow::openImageFile(QString fileName) {
+void MainWindow::openImageFile(const QString& fileName) {
   const Fm::FilePath path = Fm::FilePath::fromPathStr(qPrintable(fileName));
     // the same file! do not load it again
   if(currentFile_ && currentFile_ == path)
@@ -263,7 +301,7 @@ QString MainWindow::openDirectory() {
 }
 
 // popup a file dialog and retrieve the selected image file name
-QString MainWindow::saveFileName(QString defaultName) {
+QString MainWindow::saveFileName(const QString& defaultName) {
   QString filterStr;
   QList<QByteArray> formats = QImageWriter::supportedImageFormats();
   QList<QByteArray>::iterator it = formats.begin();
@@ -278,12 +316,17 @@ QString MainWindow::saveFileName(QString defaultName) {
   }
   // FIXME: should we generate better filter strings? one format per item?
 
-  QString fileName = QFileDialog::getSaveFileName(
-    this, tr("Save File"), defaultName, tr("Image files (%1)").arg(filterStr));
+  QString fileName;
+  QFileDialog diag(this, tr("Save File"), defaultName,
+               tr("Image files (%1)").arg(filterStr));
+  diag.setAcceptMode(QFileDialog::AcceptMode::AcceptSave);
+  diag.setFileMode(QFileDialog::FileMode::AnyFile);
+  diag.setDefaultSuffix("png");
 
-  // use png format by default if the extension is not set
-  if(!fileName.isEmpty() && fileName.indexOf('.') == -1)
-    fileName += ".png";
+  if (diag.exec()) {
+    fileName = diag.selectedFiles().at(0);
+  }
+
   return fileName;
 }
 
@@ -298,6 +341,12 @@ void MainWindow::on_actionOpenDirectory_triggered() {
   QString directory = openDirectory();
   if(!directory.isEmpty()) {
     openImageFile(directory);
+  }
+}
+
+void MainWindow::on_actionReload_triggered() {
+  if (currentFile_) {
+    loadImage(currentFile_);
   }
 }
 
@@ -435,15 +484,19 @@ void MainWindow::onImageLoaded() {
   // to nullptr). This simple check should be enough.
   if (sender() == loadJob_)
   {
+    // Add to the MRU menu
+    ui.menuRecently_Opened_Files->addItem(loadJob_->filePath().localPath().get());
+
     image_ = loadJob_->image();
+    exifData_ = loadJob_->getExifData();
 
     loadJob_ = nullptr; // the job object will be freed later automatically
 
     ui.view->setAutoZoomFit(true);
     ui.view->setImage(image_);
 
-    if(!currentIndex_.isValid())
-      currentIndex_ = indexFromPath(currentFile_);
+   // currentIndex_ should be corrected after loading
+   currentIndex_ = indexFromPath(currentFile_);
 
     updateUI();
 
@@ -529,6 +582,10 @@ void MainWindow::updateUI() {
       thumbnailsView_->childView()->setCurrentIndex(currentIndex_);
       thumbnailsView_->childView()->scrollTo(currentIndex_, QAbstractItemView::EnsureVisible);
     }
+
+    if(exifDataDock_) {
+      setShowExifData(true);
+    }
   }
 
   QString title;
@@ -606,7 +663,7 @@ void MainWindow::loadImage(const Fm::FilePath & filePath, QModelIndex index) {
   image_ = QImage();
 
   const Fm::CStrPtr basename = currentFile_.baseName();
-  char* mime_type = g_content_type_guess(basename.get(), NULL, 0, NULL);
+  char* mime_type = g_content_type_guess(basename.get(), nullptr, 0, nullptr);
   QString mimeType;
   if (mime_type) {
     mimeType = QString(mime_type);
@@ -645,7 +702,7 @@ void MainWindow::saveImage(const Fm::FilePath & filePath) {
   if(saveJob_) // do not launch a new job if the current one is still in progress
     return;
   // start a new gio job to save current image to the specified path
-  saveJob_ = new SaveImageJob(image_, filePath);
+  saveJob_ = new SaveImageJob(ui.view->image(), filePath);
   connect(saveJob_, &Fm::Job::finished, this, &MainWindow::onImageSaved);
   connect(saveJob_, &Fm::Job::error, this
         , [] (const Fm::GErrorPtr & err, Fm::Job::ErrorSeverity /*severity*/, Fm::Job::ErrorAction & /*response*/)
@@ -842,6 +899,14 @@ void MainWindow::on_actionSlideShow_triggered(bool checked) {
   }
 }
 
+void MainWindow::on_actionShowThumbnails_triggered(bool checked) {
+  setShowThumbnails(checked);
+}
+
+void MainWindow::on_actionShowExifData_triggered(bool checked) {
+  setShowExifData(checked);
+}
+
 void MainWindow::setShowThumbnails(bool show) {
   if(show) {
     if(!thumbnailsDock_) {
@@ -886,8 +951,53 @@ void MainWindow::setShowThumbnails(bool show) {
   }
 }
 
-void MainWindow::on_actionShowThumbnails_triggered(bool checked) {
-  setShowThumbnails(checked);
+void MainWindow::setShowExifData(bool show) {
+  // Close the dock if it exists and show is false
+  if (exifDataDock_ && !show) {
+    exifDataDock_->close();
+    exifDataDock_ = nullptr;
+  }
+
+  // Be sure the dock was created before rendering content to it
+  if (show && !exifDataDock_) {
+    exifDataDock_ = new QDockWidget(tr("EXIF Data"), this);
+    exifDataDock_->setFeatures(QDockWidget::NoDockWidgetFeatures);
+    addDockWidget(Qt::RightDockWidgetArea, exifDataDock_);
+  }
+
+  // Render the content to the dock
+  if (show) {
+    QWidget* exifDataDockView_ = new QWidget();
+
+    QVBoxLayout* exifDataDockViewContent_ = new QVBoxLayout();
+    QTableWidget* exifDataContentTable_ = new QTableWidget();
+
+    // Table setup
+    exifDataContentTable_->setColumnCount(2);
+    exifDataContentTable_->setShowGrid(false);
+    exifDataContentTable_->horizontalHeader()->hide();
+    exifDataContentTable_->verticalHeader()->hide();
+
+    // The table is not editable
+    exifDataContentTable_->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    // Write the EXIF Data to the table
+    for (const QString& key : exifData_.keys()) {
+      int rowCount = exifDataContentTable_->rowCount();
+
+      exifDataContentTable_->insertRow(rowCount);
+      exifDataContentTable_->setItem(rowCount,0, new QTableWidgetItem(key));
+      exifDataContentTable_->setItem(rowCount,1, new QTableWidgetItem(exifData_.value(key)));
+    }
+
+    // Table setup after content was added
+    exifDataContentTable_->resizeColumnsToContents();
+    exifDataContentTable_->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+
+    exifDataDockViewContent_->addWidget(exifDataContentTable_);
+    exifDataDockView_->setLayout(exifDataDockViewContent_);
+    exifDataDock_->setWidget(exifDataDockView_);
+  }
 }
 
 void MainWindow::changeEvent(QEvent* event) {
@@ -898,6 +1008,7 @@ void MainWindow::changeEvent(QEvent* event) {
       ui.view->setFrameStyle(QFrame::NoFrame);
       ui.view->setBackgroundBrush(QBrush(app->settings().fullScreenBgColor()));
       ui.toolBar->hide();
+      ui.annotationsToolBar->hide();
       ui.statusBar->hide();
       if(thumbnailsDock_)
         thumbnailsDock_->hide();
@@ -924,6 +1035,7 @@ void MainWindow::changeEvent(QEvent* event) {
       }
       ui.menubar->show();
       ui.toolBar->show();
+      ui.annotationsToolBar->show();
       ui.statusBar->show();
       if(thumbnailsDock_)
         thumbnailsDock_->show();
@@ -964,16 +1076,19 @@ void MainWindow::onContextMenu(QPoint pos) {
   contextMenu_->exec(ui.view->mapToGlobal(pos));
 }
 
-void MainWindow::onExitFullscreen() {
+void MainWindow::onKeyboardEscape() {
   if(isFullScreen())
-    showNormal();
+    ui.actionFullScreen->trigger(); // will also "uncheck" the menu entry
+  else
+    on_actionClose_triggered();
 }
 
 void MainWindow::onThumbnailSelChanged(const QItemSelection& selected, const QItemSelection& /*deselected*/) {
   // the selected item of thumbnail view is changed
   if(!selected.isEmpty()) {
-    QModelIndex index = selected.first().topLeft();
-    if(index.isValid() && index != currentIndex_) {
+    QModelIndex index = selected.indexes().first();
+    if(index.isValid()) {
+      // WARNING: Adding the condition index != currentIndex_ would be wrong because currentIndex_ may not be updated yet
       const auto file = proxyModel_->fileInfoFromIndex(index);
       if(file)
         loadImage(file->path(), index);

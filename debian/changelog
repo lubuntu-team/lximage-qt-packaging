@@ -1,3 +1,17 @@
+lximage-qt (0.14.0-1) unstable; urgency=medium
+
+  * Cherry-picking upstream release 0.14.0.
+  * Bumped Standards to 4.3.0, no changes needed
+  * Dropped d/compat, use debhelper-compat = 12, no changes needed
+  * Fixed years in d/copyright
+  * Bumped minimum version lxqt-build-tools (>= 0.6.0~)
+  * Bumped minimum version libfm-qt-dev (>= 0.14.0~)
+  * Removed obsolete PULL_TRANSLATIONS= OFF from dh_auto_configure
+  * Added l10n-package, moved from lxqt-l10n
+  * Added d/upstream/metadata
+
+ -- Alf Gaida <agaida@siduction.org>  Sun, 27 Jan 2019 15:45:53 +0100
+
 lximage-qt (0.7.0-2) unstable; urgency=medium
 
   * Switch to unstable

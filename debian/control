@@ -5,16 +5,16 @@ Uploaders: Alf Gaida <agaida@siduction.org>,
            Andrew Lee (李健秋) <ajqlee@debian.org>
 Section: x11
 Priority: optional
-Build-Depends: debhelper (>= 11~),
+Build-Depends: debhelper-compat (= 12),
                libexif-dev,
-               libfm-qt-dev (>= 0.13.1~),
+               libfm-qt-dev (>= 0.14.0~),
                libkf5windowsystem-dev,
                libqt5svg5-dev,
                libqt5x11extras5-dev,
                libx11-dev,
                libxfixes-dev,
-               lxqt-build-tools (>= 0.5.0~)
-Standards-Version: 4.1.5
+               lxqt-build-tools (>= 0.6.0~),
+Standards-Version: 4.3.0
 Vcs-Browser: https://salsa.debian.org/lxqt-team/lximage-qt
 Vcs-Git: https://salsa.debian.org/lxqt-team/lximage-qt.git
 Homepage: https://github.com/lxqt/lximage-qt
@@ -30,3 +30,17 @@ Description: Image viewer for LXQt
  one install qt5-image-formats-plugins.
  .
  This package contain the program files.
+
+Package: lximage-qt-l10n
+Architecture: all
+Multi-Arch: foreign
+Section: localization
+Depends: ${misc:Depends},
+         qttranslations5-l10n
+Breaks: lximage-qt (<< 0.5.0)
+Replaces: lximage-qt (<< 0.5.0)
+Description: Language-package for lximage-qt
+ A simple image viewer for LXQt. Additional file formats can be processed if
+ one install qt5-image-formats-plugins.
+ .
+ This package contains the l10n files needed by the lximage-qt.
