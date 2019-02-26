@@ -7,7 +7,7 @@ Section: x11
 Priority: optional
 Build-Depends: debhelper-compat (= 12),
                libexif-dev,
-               libfm-qt-dev (>= 0.14.0~),
+               libfm-qt-dev (>= 0.14.1~),
                libkf5windowsystem-dev,
                libqt5svg5-dev,
                libqt5x11extras5-dev,
