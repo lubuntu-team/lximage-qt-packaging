@@ -1,8 +1,7 @@
 Source: lximage-qt
-Maintainer: LXQt Packaging Team <pkg-lxqt-devel@lists.alioth.debian.org>
-Uploaders: Alf Gaida <agaida@siduction.org>,
-           ChangZhuo Chen (陳昌倬) <czchen@debian.org>,
-           Andrew Lee (李健秋) <ajqlee@debian.org>
+Maintainer: Lubuntu Developers <lubuntu-devel@lists.ubuntu.com>
+XSBC-Original-Maintainer: LXQt Packaging Team <pkg-lxqt-devel@lists.alioth.debian.org>
+Uploaders: Simon Quigley <tsimonq2@ubuntu.com>
 Section: x11
 Priority: optional
 Build-Depends: debhelper-compat (= 12),
@@ -13,18 +12,18 @@ Build-Depends: debhelper-compat (= 12),
                libqt5x11extras5-dev,
                libx11-dev,
                libxfixes-dev,
-               lxqt-build-tools (>= 0.6.0~),
+               lxqt-build-tools (>= 0.6.0~)
 Standards-Version: 4.3.0
-Vcs-Browser: https://salsa.debian.org/lxqt-team/lximage-qt
-Vcs-Git: https://salsa.debian.org/lxqt-team/lximage-qt.git
+Vcs-Browser: https://phab.lubuntu.me/source/lxqt-panel/
+Vcs-Git: https://phab.lubuntu.me/source/lxqt-panel.git
+XS-Debian-Vcs-Browser: https://salsa.debian.org/lxqt-team/lximage-qt
+XS-Debian-Vcs-Git: https://salsa.debian.org/lxqt-team/lximage-qt.git
 Homepage: https://github.com/lxqt/lximage-qt
 
 Package: lximage-qt
 Architecture: any
-Depends: ${misc:Depends},
-         ${shlibs:Depends}
-Recommends: lximage-qt-l10n,
-            qt5-image-formats-plugins
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Recommends: lximage-qt-l10n, qt5-image-formats-plugins
 Description: Image viewer for LXQt
  A simple image viewer for LXQt. Additional file formats can be processed if
  one install qt5-image-formats-plugins.
@@ -35,8 +34,7 @@ Package: lximage-qt-l10n
 Architecture: all
 Multi-Arch: foreign
 Section: localization
-Depends: ${misc:Depends},
-         qttranslations5-l10n
+Depends: qttranslations5-l10n, ${misc:Depends}
 Breaks: lximage-qt (<< 0.5.0)
 Replaces: lximage-qt (<< 0.5.0)
 Description: Language-package for lximage-qt
