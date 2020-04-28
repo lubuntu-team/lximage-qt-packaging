@@ -1,3 +1,9 @@
+lximage-qt (0.15.0-0ubuntu1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Tue, 28 Apr 2020 18:05:41 -0500
+
 lximage-qt (0.14.1-1ubuntu1) disco; urgency=medium
 
   * Lubuntuify the packaging.
