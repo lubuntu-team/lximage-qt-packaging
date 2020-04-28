@@ -6,13 +6,13 @@ Section: x11
 Priority: optional
 Build-Depends: debhelper-compat (= 12),
                libexif-dev,
-               libfm-qt-dev (>= 0.14.1~),
+               libfm-qt-dev (>= 0.15.0),
                libkf5windowsystem-dev,
                libqt5svg5-dev,
                libqt5x11extras5-dev,
                libx11-dev,
                libxfixes-dev,
-               lxqt-build-tools (>= 0.6.0~)
+               lxqt-build-tools (>= 0.7.0)
 Standards-Version: 4.5.0
 Vcs-Browser: https://phab.lubuntu.me/source/lxqt-panel/
 Vcs-Git: https://phab.lubuntu.me/source/lxqt-panel.git
