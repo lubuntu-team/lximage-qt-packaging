@@ -1,3 +1,21 @@
+lximage-qt (0.16.0-1ubuntu1) hirsute; urgency=medium
+
+  * New upstream version.
+  * Bump debhelper-compat requirement  to 13.
+
+ -- Raman Sarda <theloudspeaker@disroot.org>  Sun, 21 Feb 2021 21:12:59 +0530
+
+lximage-qt (0.16.0-1) unstable; urgency=medium
+
+  [ Alf Gaida ]
+  * Switched to gbp
+  * Bumped Standards-Version to 4.4.0, no changes needed
+
+  [ Andrew Lee (李健秋) ]
+  * New upstream release. (Closes: #978178)
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Thu, 07 Jan 2021 18:12:17 +0800
+
 lximage-qt (0.15.0-0ubuntu1) groovy; urgency=medium
 
   * New upstream release.
@@ -189,3 +207,4 @@ lximage-qt (0.4.0+20150828-1) unstable; urgency=medium
   * Initial release (Closes: #795802)
 
  -- ChangZhuo Chen (陳昌倬) <czchen@debian.org>  Thu, 24 Sep 2015 18:50:12 +0800
+
