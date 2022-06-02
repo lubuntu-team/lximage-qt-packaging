@@ -35,8 +35,6 @@ Architecture: all
 Multi-Arch: foreign
 Section: localization
 Depends: qttranslations5-l10n, ${misc:Depends}
-Breaks: lximage-qt (<< 0.5.0)
-Replaces: lximage-qt (<< 0.5.0)
 Description: Language-package for lximage-qt
  A simple image viewer for LXQt. Additional file formats can be processed if
  one install qt5-image-formats-plugins.
