@@ -1,3 +1,9 @@
+lximage-qt (1.1.0-0ubuntu2) kinetic; urgency=medium
+
+  * Add missing entry to install file.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Thu, 02 Jun 2022 13:39:08 -0500
+
 lximage-qt (1.1.0-0ubuntu1) kinetic; urgency=medium
 
   * New upstream release.

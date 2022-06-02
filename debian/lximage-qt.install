@@ -1,3 +1,4 @@
 usr/bin/lximage-qt
 usr/share/applications
 usr/share/icons/hicolor
+usr/share/metainfo/lximage-qt.metainfo.xml
