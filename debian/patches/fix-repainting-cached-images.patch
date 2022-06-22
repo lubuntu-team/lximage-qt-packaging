@@ -1,0 +1,27 @@
+From a526f1b0fcfe1d15368c1d3fdf4676c40fb8524d Mon Sep 17 00:00:00 2001
+From: tsujan <tsujan2000@gmail.com>
+Date: Tue, 21 Jun 2022 01:14:55 +0430
+Subject: [PATCH] Fixed repainting of cached images (#558)
+
+Previously, the cached pixmap was drawn inside the repaint rectangle. That was wrong because there's no guarantee that the repaint rectangle is as big as the cached pixmap (e.g., it isn't so when the toolbar extension popup covers a part of the image and slides back). Therefore, visual glitches were imminent in special cases.
+
+This patch draws the cached pixmap inside its corresponding cache rectangle, so that the image is always repainted correctly. The paint clipping is done by Qt automatically, as QPaintEvent's doc explains.
+
+Fixes https://github.com/lxqt/lximage-qt/issues/557
+---
+ src/imageview.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/imageview.cpp b/src/imageview.cpp
+index 4a0c6b2..aa13393 100644
+--- a/src/imageview.cpp
++++ b/src/imageview.cpp
+@@ -630,7 +630,7 @@ void ImageView::paintEvent(QPaintEvent* event) {
+       if(cachedRect_.contains(repaintImageRect)) {
+         QPainter painter(viewport());
+         painter.fillRect(event->rect(), backgroundBrush());
+-        painter.drawPixmap(repaintImageRect, cachedPixmap_);
++        painter.drawPixmap(cachedRect_, cachedPixmap_);
+         // outline
+         if(showOutline_) {
+             QColor col = QColor(Qt::black);

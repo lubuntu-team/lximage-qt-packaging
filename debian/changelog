@@ -1,3 +1,11 @@
+lximage-qt (1.1.0-0ubuntu3) kinetic; urgency=medium
+
+  * Add upstream patch which fixes repainting of cached images:
+    - https://github.com/lxqt/lximage-qt/pull/558
+    - https://github.com/lxqt/lximage-qt/commit/a526f1
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Wed, 22 Jun 2022 00:06:31 -0500
+
 lximage-qt (1.1.0-0ubuntu2) kinetic; urgency=medium
 
   * Add missing entry to install file.
