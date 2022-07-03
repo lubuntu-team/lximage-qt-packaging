@@ -9,6 +9,7 @@ lximage-qt (1.1.0-0ubuntu3~ppa1) jammy; urgency=medium
   * Bumped Standards-Version to 4.6.1, no changes necessary.
   * Removed redundant Repository-Browser field from d/upstream/metadata.
   * Removed obsolete "-Wl,--as-needed" linker flag.
+  * Added "Rules-Requires-Root: no" to debian/control (Lintian gripe fix).
 
  -- Aaron Rainbolt <arraybolt3@gmail.com>  Sun, 03 Jul 2022 09:04:20 -0500
 
