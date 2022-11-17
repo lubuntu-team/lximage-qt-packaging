@@ -1,43 +1,23 @@
-lximage-qt (1.1.0-0ubuntu3) kinetic; urgency=medium
+lximage-qt (1.1.0-1) experimental; urgency=medium
 
-  * Add upstream patch which fixes repainting of cached images:
-    - https://github.com/lxqt/lximage-qt/pull/558
-    - https://github.com/lxqt/lximage-qt/commit/a526f1
+  [ S. 7 ]
+  * New upstream release
+  * Bumped Standards-Version to 4.6.0, no changes needed
+  * Update debian/copyright
 
- -- Simon Quigley <tsimonq2@ubuntu.com>  Wed, 22 Jun 2022 00:06:31 -0500
-
-lximage-qt (1.1.0-0ubuntu2) kinetic; urgency=medium
-
-  * Add missing entry to install file.
-
- -- Simon Quigley <tsimonq2@ubuntu.com>  Thu, 02 Jun 2022 13:39:08 -0500
-
-lximage-qt (1.1.0-0ubuntu1) kinetic; urgency=medium
-
+  [ Aaron Rainbolt ]
   * New upstream release.
-  * Bumped build dependencies.
-  * Drop old Breaks/Replaces since we're past the LTS. Update the
-    runtime dependencies too.
+  * Removed trailing whitespace from changelog.
+  * Upstreamed packaging changes from Ubuntu, modifying the following files:
+    - control
+    - copyright
+    - lintian-overrides
+    - lximage-qt.install
+    - rules
+    - upstream/*
+    - patches directory
 
- -- Simon Quigley <tsimonq2@ubuntu.com>  Thu, 02 Jun 2022 12:43:41 -0500
-
-lximage-qt (0.17.0-0ubuntu1) impish; urgency=medium
-
-  * New upstream release 0.17.0
-  * Update debian/control
-    - Bump Standards-Version to 4.5.1
-    - Use lxqt-build-tools 0.9.0
-    - Use libfm-qt-dev 0.17.1
-  * Rename tag for lintian override
-
- -- apt-ghetto <apt-ghetto@protonmail.com>  Wed, 11 Aug 2021 16:38:52 +0200
-
-lximage-qt (0.16.0-1ubuntu1) hirsute; urgency=medium
-
-  * New upstream version.
-  * Bump debhelper-compat requirement  to 13.
-
- -- Raman Sarda <theloudspeaker@disroot.org>  Sun, 21 Feb 2021 21:12:59 +0530
+ -- Aaron Rainbolt <arraybolt3@gmail.com>  Wed, 13 Jul 2022 19:06:28 -0500
 
 lximage-qt (0.16.0-1) unstable; urgency=medium
 
@@ -49,21 +29,6 @@ lximage-qt (0.16.0-1) unstable; urgency=medium
   * New upstream release. (Closes: #978178)
 
  -- Andrew Lee (李健秋) <ajqlee@debian.org>  Thu, 07 Jan 2021 18:12:17 +0800
-
-lximage-qt (0.15.0-0ubuntu1) groovy; urgency=medium
-
-  * New upstream release.
-    - Update upstream signing key.
-    - Update LXQt build dependencies.
-  * Update Standards-version to 4.5.0, no changes needed.
-
- -- Simon Quigley <tsimonq2@ubuntu.com>  Thu, 04 Jun 2020 00:47:42 -0500
-
-lximage-qt (0.14.1-1ubuntu1) disco; urgency=medium
-
-  * Lubuntuify the packaging.
-
- -- Simon Quigley <tsimonq2@ubuntu.com>  Fri, 08 Mar 2019 10:59:35 -0600
 
 lximage-qt (0.14.1-1) unstable; urgency=medium
 
@@ -241,4 +206,3 @@ lximage-qt (0.4.0+20150828-1) unstable; urgency=medium
   * Initial release (Closes: #795802)
 
  -- ChangZhuo Chen (陳昌倬) <czchen@debian.org>  Thu, 24 Sep 2015 18:50:12 +0800
-
