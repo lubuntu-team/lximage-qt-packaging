@@ -1,4 +1,4 @@
-lximage-qt (1.2.0-0ubuntu1) UNRELEASED; urgency=medium
+lximage-qt (1.2.0-0ubuntu1) lunar; urgency=medium
 
   * New upstream release.
   * Fix the watch file, for real this time.
@@ -6,7 +6,7 @@ lximage-qt (1.2.0-0ubuntu1) UNRELEASED; urgency=medium
   * Bump build dependencies in debian/control.
   * Remove reverse-applicable patch.
 
- -- Simon Quigley <tsimonq2@ubuntu.com>  Thu, 17 Nov 2022 17:43:52 -0600
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Thu, 17 Nov 2022 17:52:27 -0600
 
 lximage-qt (1.1.0-2) unstable; urgency=medium
 
