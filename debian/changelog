@@ -1,18 +1,17 @@
-lximage-qt (1.2.0-0ubuntu2) lunar; urgency=medium
+lximage-qt (1.2.0-2) unstable; urgency=medium
 
-  * No-change rebuild against libfm-qt 1.2.1.
+  * Merge to unstable.
 
- -- Aaron Rainbolt <arraybolt3@ubuntu.com>  Fri, 27 Jan 2023 15:46:45 -0600
+ -- ChangZhuo Chen (陳昌倬) <czchen@debian.org>  Fri, 02 Dec 2022 13:16:18 +0800
 
-lximage-qt (1.2.0-0ubuntu1) lunar; urgency=medium
+lximage-qt (1.2.0-1) experimental; urgency=medium
 
   * New upstream release.
-  * Fix the watch file, for real this time.
-  * Lubuntuify the package slightly, to make debhelper happy.
-  * Bump build dependencies in debian/control.
-  * Remove reverse-applicable patch.
+  * Remove unnecessary patch.
+  * Fix d/watch for GitHub.
+  * Sort d/copyright.
 
- -- Simon Quigley <tsimonq2@ubuntu.com>  Thu, 17 Nov 2022 17:52:27 -0600
+ -- ChangZhuo Chen (陳昌倬) <czchen@debian.org>  Wed, 30 Nov 2022 22:07:50 +0800
 
 lximage-qt (1.1.0-2) unstable; urgency=medium
 
@@ -62,11 +61,24 @@ lximage-qt (1.1.0-1) experimental; urgency=medium
 
 lximage-qt (1.0.0-1) unstable; urgency=medium
 
+  [ S. 7 ]
   * New upstream release
   * Bumped Standards-Version to 4.6.0, no changes needed
   * Update debian/copyright
 
- -- S. 7 <severusseptimius7@gmail.com>  Thu, 25 Nov 2021 18:19:55 +0200
+  [ Aaron Rainbolt ]
+  * New upstream release.
+  * Removed trailing whitespace from changelog.
+  * Upstreamed packaging changes from Ubuntu, modifying the following files:
+    - control
+    - copyright
+    - lintian-overrides
+    - lximage-qt.install
+    - rules
+    - upstream/*
+    - patches directory
+
+ -- Aaron Rainbolt <arraybolt3@gmail.com>  Wed, 13 Jul 2022 19:06:28 -0500
 
 lximage-qt (0.16.0-1) unstable; urgency=medium
 
