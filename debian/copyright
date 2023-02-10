@@ -8,39 +8,34 @@ Copyright: 2013-2016 Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
 License: GPL-2+ and LGPL-2.1+
 
 Files: src/application.*
+       src/graphicsscene.*
+       src/imageview.cpp
        src/loadimagejob.*
+       src/lximage-qt.*
        src/mainwindow.*
        src/modelfilter.*
+       src/mrumenu.*
        src/preferencesdialog.*
+       src/resizeimagedialog.*
        src/saveimagejob.*
+       src/screenshotdialog.*
+       src/screenshotselectarea.*
+       src/screenshotselectareagraphicsview.*
        src/settings.*
-Copyright: 2013-2016 Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
+       src/statusbar.*
+       src/upload/*
+Copyright: 2013 Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
+           2013 Pedram Pourang <tsujan2000@gmail.com>
+           2017 Nathan Osman <nathan@quickmediasolutions.com>
+           2010 Aurélien Gâteau <agateau@kde.org>
+           2018 Nathan Osman <nathan@quickmediasolutions.com>
+           2020 Andrea Diamantini <adjam@protonmail.com>
 License: GPL-2+
 
-Files: src/mrumenu.cpp
-Copyright: 2018, Nathan Osman <nathan@quickmediasolutions.com>
-           2013, Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
-License: GPL-2+
-
-Files: src/resizeimagedialog.cpp
-       src/resizeimagedialog.h
-Copyright: 2020, Andrea Diamantini <adjam@protonmail.com>
-           2013, Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
-           2010, Aurélien Gâteau <agateau@kde.org>
-License: GPL-2+
-
-Files: src/statusbar.cpp
-       src/statusbar.h
-Copyright: 2013, Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
-           2013, Pedram Pourang <tsujan2000@gmail.com>
-License: GPL-2+
-
-Files: src/upload/imgbbprovider.cpp
-       src/upload/imgbbprovider.h
-       src/upload/imgbbupload.cpp
-       src/upload/imgbbupload.h
-Copyright: 2017, Nathan Osman <nathan@quickmediasolutions.com>
-License: GPL-2+
+Files: src/upload/uploaddialog.ui
+Copyright: 2013-2016 Hong Jen Yee (PCMan) <pcman.tw@gmail.com>  ?
+           2013-2022 LXQt team
+License: GPL-2+ and LGPL-2.1+
 
 Files: data/lximage-qt.metainfo.xml
 Copyright: 2022 LXQt team
@@ -50,7 +45,7 @@ Files: debian/*
 Copyright: 2014-2019 Alf Gaida <agaida@siduction.org>
            2015-2022 Andrew Lee (李健秋) <ajqlee@debian.org>
            2015      ChangZhuo Chen (陳昌倬) <czchen@debian.org>
-           2022      Lubuntu Developers <lubuntu-devel@lists.ubuntu.com>
+           2023      Lubuntu Developers <lubuntu-devel@lists.ubuntu.com>
 License: LGPL-2.1+
 
 License: LGPL-2.1+
