@@ -1,9 +1,9 @@
-lximage-qt (1.3.0-0ubuntu1) UNRELEASED; urgency=medium
+lximage-qt (1.3.0-0ubuntu1) mantic; urgency=medium
 
   * New upstream release.
   * Bump build dependencies.
 
- -- Simon Quigley <tsimonq2@ubuntu.com>  Thu, 10 Aug 2023 16:37:35 -0500
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Fri, 11 Aug 2023 09:48:31 -0500
 
 lximage-qt (1.2.0-2ubuntu1) lunar; urgency=medium
 
