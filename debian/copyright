@@ -4,7 +4,7 @@ Source: https://github.com/lxqt/lximage-qt
 
 Files: *
 Copyright: 2013-2016 Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
-           2013-2022 LXQt team
+           2013-2023 LXQt team
 License: GPL-2+ and LGPL-2.1+
 
 Files: src/application.*
