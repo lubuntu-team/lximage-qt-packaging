@@ -1,6 +1,7 @@
 lximage-qt (2.0.1-0ubuntu1) UNRELEASED; urgency=medium
 
   * New upstream release.
+  * Update copyright file.
 
  -- Aaron Rainbolt <arraybolt3@ubuntu.com>  Fri, 28 Jun 2024 19:52:59 -0500
 
