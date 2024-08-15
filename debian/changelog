@@ -1,11 +1,11 @@
-lximage-qt (2.0.1-0ubuntu1~ppa1) oracular; urgency=medium
+lximage-qt (2.0.1-0ubuntu1) oracular; urgency=medium
 
   * New upstream release.
   * Update copyright file.
   * Bump Standards-Version to 4.7.0, no changes necessary.
   * Adjust dependencies.
 
- -- Aaron Rainbolt <arraybolt3@ubuntu.com>  Fri, 28 Jun 2024 19:52:59 -0500
+ -- Aaron Rainbolt <arraybolt3@ubuntu.com>  Thu, 15 Aug 2024 16:51:12 -0500
 
 lximage-qt (1.4.0-0ubuntu1) noble; urgency=medium
 
