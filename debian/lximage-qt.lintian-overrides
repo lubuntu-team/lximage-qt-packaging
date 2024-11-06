@@ -1,0 +1,4 @@
+# This is expected
+lximage-qt: desktop-entry-lacks-keywords-entry [usr/share/applications/*.desktop]
+lximage-qt: appstream-metadata-validation-failed *
+lximage-qt: no-manual-page [usr/bin/*]
