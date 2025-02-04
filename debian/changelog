@@ -1,3 +1,9 @@
+lximage-qt (2.1.1-0ubuntu1) plucky; urgency=medium
+
+  * New upstream release.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Tue, 04 Feb 2025 15:27:05 -0600
+
 lximage-qt (2.1.0-0ubuntu1) plucky; urgency=medium
 
   * New upstream release.
