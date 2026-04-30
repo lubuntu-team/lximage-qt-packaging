@@ -7,7 +7,7 @@ Uploaders: Alf Gaida <agaida@siduction.org>,
 Section: x11
 Build-Depends: debhelper-compat (= 13),
                libexif-dev,
-               libfm-qt6-dev (>= 2.3.0),
+               libfm-qt6-dev (>= 2.4.0),
                libx11-dev,
                libxcb-composite0-dev,
                libxcb-cursor-dev,
@@ -37,7 +37,7 @@ Build-Depends: debhelper-compat (= 13),
                libxcb-xvmc0-dev,
                libxfixes-dev,
                libxkbcommon-dev (>= 0.5.0),
-               lxqt-build-tools (>= 2.3.0),
+               lxqt-build-tools (>= 2.4.0),
                qt6-svg-dev (>= 6.6.0)
 Standards-Version: 4.7.4
 Vcs-Browser: https://git.lubuntu.me/Lubuntu/lxqt-about-packaging
