@@ -1,10 +1,10 @@
-lximage-qt (2.5.0-0ubuntu1) UNRELEASED; urgency=medium
+lximage-qt (2.5.0-0ubuntu1) tenacious; urgency=medium
 
   * New upstream release.
   * Update build dependencies.
   * Update to debhelper-compat 14.
 
- -- Simon Quigley <tsimonq2@debian.org>  Wed, 04 Nov 2026 20:27:46 -0600
+ -- Simon Quigley <tsimonq2@debian.org>  Wed, 04 Nov 2026 21:47:01 -0600
 
 lximage-qt (2.4.0-0ubuntu1) stonking; urgency=medium
 
