@@ -5,7 +5,7 @@ Uploaders: Alf Gaida <agaida@siduction.org>,
            ChangZhuo Chen (陳昌倬) <czchen@debian.org>,
            Andrew Lee (李健秋) <ajqlee@debian.org>
 Section: x11
-Build-Depends: debhelper-compat (= 13),
+Build-Depends: debhelper-compat (= 14),
                libexif-dev,
                libfm-qt6-dev (>= 2.5.0),
                libx11-dev,
@@ -48,7 +48,6 @@ Homepage: https://github.com/lxqt/lximage-qt
 
 Package: lximage-qt
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
 Recommends: lximage-qt-l10n, qt6-image-formats-plugins
 Description: Image viewer for LXQt
  A simple image viewer for LXQt. Additional file formats can be processed if
@@ -60,7 +59,7 @@ Package: lximage-qt-l10n
 Architecture: all
 Multi-Arch: foreign
 Section: localization
-Depends: qt6-translations-l10n, ${misc:Depends}
+Depends: qt6-translations-l10n
 Description: Language-package for lximage-qt
  A simple image viewer for LXQt. Additional file formats can be processed if
  one install qt6-image-formats-plugins.
